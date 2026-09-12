@@ -1,0 +1,46 @@
+{
+    "contentVersion": "3.0.0",
+    "defaultSubject": "ppkn",
+    "subjects": [
+        {
+            "id": "ppkn",
+            "judul": "Pendidikan Pancasila",
+            "deskripsi": "Sejarah, kedudukan, dan penerapan Pancasila dalam kehidupan bernegara.",
+            "icon": "flag",
+            "color": "#C9A227",
+            "file": "materi.json",
+            "order": 1,
+            "active": true,
+            "metadata": {
+                "tingkat": "SMK Kelas X",
+                "pembuat": "Deden Moh Jaenudin, S.H."
+            }
+        },
+        {
+            "id": "hukum",
+            "judul": "Ilmu Hukum",
+            "deskripsi": "Pengantar ilmu hukum, hukum tata negara, dan topik hukum terkini.",
+            "icon": "gavel",
+            "color": "#16324F",
+            "file": "hukum.json",
+            "order": 2,
+            "active": true,
+            "metadata": {
+                "pembuat": "Deden Moh Jaenudin, S.H."
+            }
+        },
+        {
+            "id": "komputer",
+            "judul": "Komputer & Jaringan",
+            "deskripsi": "Dasar komputer, jaringan, dan tutorial praktis untuk siswa SMK.",
+            "icon": "computer",
+            "color": "#A6403F",
+            "file": "komputer.json",
+            "order": 3,
+            "active": true,
+            "metadata": {
+                "pembuat": "Deden Moh Jaenudin, S.H."
+            }
+        }
+    ]
+}

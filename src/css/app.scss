@@ -1,0 +1,83 @@
+/* ═════════════════════════════════════════════════════════════
+   PRINT MODE
+   ═════════════════════════════════════════════════════════════ */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 10mm;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #FFFFFF !important;
+    overflow: visible !important;
+    height: auto !important;
+    width: auto !important;
+  }
+
+  /* Sembunyikan semua */
+  body * {
+    visibility: hidden !important;
+  }
+
+  /* Tampilkan hanya target PDF (dua-duanya) */
+  .pdf-target,
+  .pdf-target *,
+  .analitik-pdf-target,
+  .analitik-pdf-target * {
+    visibility: visible !important;
+  }
+
+  /* Posisikan ke (0,0) */
+  .pdf-target,
+  .analitik-pdf-target {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #FFFFFF !important;
+    color: #1B2733 !important;
+    font-size: 11pt !important;
+    line-height: 1.6 !important;
+    box-shadow: none !important;
+    border: none !important;
+    z-index: auto !important;
+    transform: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Sembunyikan overlay & elemen no-print */
+  .pdf-loading-overlay,
+  .analitik-loading,
+  .no-print {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Page break */
+  .pdf-section,
+  .analitik-pdf-target .pdf-section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .pdf-section + .pdf-section {
+    page-break-before: always;
+    break-before: page;
+  }
+  .pdf-section-title,
+  .pdf-header,
+  .pdf-cover {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid;
+  }
+}

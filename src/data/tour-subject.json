@@ -1,0 +1,58 @@
+{
+    "tourVersion": 1,
+    "storageKey": "ppkn-tour-subject",
+    "steps": [
+        {
+            "id": "subject-welcome",
+            "title": "Ini Halaman Subject 📖",
+            "description": "Di halaman ini Anda dapat melihat semua modul yang tersedia untuk subject ini. Mari kita lihat fitur-fiturnya sebentar.",
+            "target": null,
+            "placement": "center"
+        },
+        {
+            "id": "subject-hero",
+            "title": "Info Subject",
+            "description": "Header ini menampilkan nama subject, deskripsi, jumlah modul, dan KKM. Tombol 'Kembali' membawa Anda ke beranda untuk pindah subject lain.",
+            "target": "[data-tour-subject='hero']",
+            "placement": "bottom"
+        },
+        {
+            "id": "subject-progress",
+            "title": "Progres Anda",
+            "description": "Jika sudah ada progress, panel ini akan menampilkan kemajuan Anda. Setiap kotak mewakili satu modul — akan berwarna emas saat Anda lulus.",
+            "target": "[data-tour-subject='progress']",
+            "placement": "bottom",
+            "optional": true
+        },
+        {
+            "id": "subject-modules",
+            "title": "Daftar Modul",
+            "description": "Modul disusun berjenjang. Modul pertama terbuka langsung, modul berikutnya terbuka setelah Anda lulus Post Test modul sebelumnya dengan KKM.",
+            "target": "[data-tour-subject='modules']",
+            "placement": "top"
+        },
+        {
+            "id": "subject-module-card",
+            "title": "Kartu Modul",
+            "description": "Setiap kartu menampilkan status: 🔒 Terkunci, ▶ Sedang Belajar, atau ✓ Lulus KKM. Klik 'Mulai Belajar' untuk masuk ke modul.",
+            "target": "[data-tour-subject='module-card-first']",
+            "placement": "bottom",
+            "optional": true
+        },
+        {
+            "id": "subject-final",
+            "title": "Final Test",
+            "description": "Setelah semua modul lulus, tombol Final Test akan muncul di sini untuk menguji pemahaman Anda secara keseluruhan.",
+            "target": "[data-tour-subject='final']",
+            "placement": "top",
+            "optional": true
+        },
+        {
+            "id": "subject-finish",
+            "title": "Selamat Belajar! 🎓",
+            "description": "Mulai dari modul pertama. Kerjakan Free Test untuk melihat pengetahuan awal, baca materi, lalu taklukkan Post Test. Semangat!",
+            "target": null,
+            "placement": "center"
+        }
+    ]
+}

@@ -1,0 +1,518 @@
+{
+  "contentVersion": "1.0.0",
+  "subjectId": "komputer",
+  "updatedAt": "2026-09-12",
+  "modules": [
+    {
+      "id": "komputer-01",
+      "urutan": 1,
+      "judul": "Dasar-Dasar Komputer dan Jaringan",
+      "judulShort": "Modul 1",
+      "deskripsi": "Mengenal komponen sistem komputer, perbedaan hardware dan software, serta konsep dasar jaringan komputer.",
+      "tujuanPembelajaran": [
+        "Menjelaskan komponen utama sistem komputer",
+        "Membedakan hardware, software, dan brainware",
+        "Memahami konsep dasar jaringan komputer dan jenis-jenisnya"
+      ],
+      "passingScore": 80,
+      "sections": [
+        {
+          "id": "lesson-komputer-01-01",
+          "judul": "A. Pengenalan Sistem Komputer",
+          "konten": [
+            {
+              "type": "paragraph",
+              "text": "**Komputer** adalah perangkat elektronik yang dapat menerima input, memproses data sesuai instruksi, menyimpan hasil pemrosesan, dan menghasilkan output. Kata 'komputer' berasal dari bahasa Latin *computare* yang berarti 'menghitung'. Sejak diciptakan pertama kali pada pertengahan abad ke-20, komputer telah merevolusi hampir seluruh aspek kehidupan manusia — dari komunikasi, pendidikan, bisnis, hingga hiburan."
+            },
+            {
+              "type": "paragraph",
+              "text": "Agar dapat berfungsi, komputer membutuhkan **tiga komponen utama** yang saling bekerja sama: **hardware**, **software**, dan **brainware**. Ketiganya tidak bisa dipisahkan — komputer tanpa salah satunya ibarat mobil tanpa roda, mesin, atau sopir."
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "Hardware — perangkat fisik komputer (monitor, CPU, keyboard, dll.)",
+                "Software — program atau instruksi yang menjalankan hardware",
+                "Brainware — manusia yang mengoperasikan komputer"
+              ]
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Analogi Sederhana",
+              "text": "Bayangkan komputer seperti **mobil**. **Hardware** adalah bodi, mesin, dan rodanya. **Software** adalah bahan bakar dan instruksi kemudi — tanpa software, mobil tidak bisa jalan meski mesinnya canggih. **Brainware** adalah sopir — tanpa sopir, mobil hanya jadi pajangan. Ketiganya harus ada agar mobil bisa berjalan. Begitu pula komputer."
+            },
+            {
+              "type": "heading",
+              "text": "Siklus Pengolahan Data",
+              "level": 3
+            },
+            {
+              "type": "paragraph",
+              "text": "Setiap komputer bekerja mengikuti siklus dasar yang disebut **IPO Cycle** — Input, Process, Output. **Input** adalah data atau perintah yang masuk ke komputer (misalnya ketikan keyboard, klik mouse, atau suara mikrofon). **Process** adalah pengolahan data oleh CPU (Central Processing Unit) sesuai instruksi program. **Output** adalah hasil pengolahan yang ditampilkan ke pengguna (misalnya teks di layar, suara dari speaker, atau cetakan dari printer)."
+            },
+            {
+              "type": "image",
+              "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX7dZHxUxDsOgRRju97CsBXAPmO1f2JzKhWSAhn8yfp2LITUFja10uWpU&s=10",
+              "alt": "Diagram siklus IPO: Input → Process → Output",
+              "caption": "Siklus IPO (Input-Process-Output) — cara kerja dasar setiap komputer-*sumber*:https://intellipaat.com/blog/ipo-cycle/",
+              "width": "medium"
+            },
+            {
+              "type": "paragraph",
+              "text": "Selain tiga tahap di atas, komputer modern juga melakukan **penyimpanan** (storage). Data yang diinput atau hasil pemrosesan dapat disimpan ke **penyimpanan permanen** seperti hard disk atau SSD, sehingga bisa diakses kembali di lain waktu. Penyimpanan ini membuat siklus menjadi **IPOS** (Input-Process-Output-Storage)."
+            },
+            {
+              "type": "callout",
+              "variant": "success",
+              "title": "Kesimpulan",
+              "text": "Komputer adalah sistem yang terdiri dari hardware, software, dan brainware. Ia bekerja melalui siklus IPOS: menerima input, memprosesnya, menghasilkan output, dan menyimpan data untuk digunakan di masa depan."
+            }
+          ],
+          "poinPenting": [
+            "Komputer berasal dari kata Latin 'computare' yang berarti menghitung",
+            "Tiga komponen utama: hardware, software, brainware",
+            "Siklus IPO: Input → Process → Output (diperluas menjadi IPOS dengan Storage)",
+            "CPU adalah pusat pengolahan data komputer"
+          ],
+          "kataKunci": [
+            "Komputer",
+            "Hardware",
+            "Software",
+            "Brainware",
+            "IPO",
+            "IPOS",
+            "CPU"
+          ]
+        },
+        {
+          "id": "lesson-komputer-01-02",
+          "judul": "B. Hardware dan Software",
+          "konten": [
+            {
+              "type": "paragraph",
+              "text": "Setelah memahami siklus kerja komputer, sekarang kita pelajari **komponen-komponennya** secara lebih rinci. Seperti yang disebutkan sebelumnya, ada hardware, software, dan brainware. Mari kita bahas dua yang pertama secara lebih dalam — karena keduanya adalah fondasi teknis dari setiap sistem komputer."
+            },
+            {
+              "type": "heading",
+              "text": "Hardware (Perangkat Keras)",
+              "level": 3
+            },
+            {
+              "type": "paragraph",
+              "text": "**Hardware** adalah semua bagian fisik komputer yang dapat dilihat dan disentuh. Berdasarkan fungsinya, hardware dikelompokkan menjadi empat kategori utama:"
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Perangkat Input — keyboard, mouse, scanner, mikrofon, webcam",
+                "Perangkat Proses — CPU, RAM, motherboard, GPU",
+                "Perangkat Output — monitor, printer, speaker, proyektor",
+                "Perangkat Penyimpanan — hard disk, SSD, flash drive, CD/DVD"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**CPU** (Central Processing Unit) adalah otak dari komputer. Ia terdiri atas dua bagian utama: **ALU** (Arithmetic Logic Unit) yang menangani perhitungan matematika dan logika, serta **Control Unit** yang mengatur alur instruksi. **RAM** (Random Access Memory) adalah memori kerja sementara — semua program yang sedang berjalan dimuat di sini. Semakin besar RAM, semakin banyak program yang bisa berjalan bersamaan."
+            },
+            {
+              "type": "callout",
+              "variant": "warning",
+              "title": "RAM vs Hard Disk",
+              "text": "**RAM** bersifat *volatile* — datanya hilang saat komputer dimatikan. **Hard disk / SSD** bersifat *non-volatile* — datanya tetap tersimpan meski komputer mati. Analoginya: RAM seperti meja kerja (luas meja menentukan berapa banyak dokumen yang bisa dibuka sekaligus), sedangkan hard disk seperti lemari arsip (tempat menyimpan semua dokumen permanen)."
+            },
+            {
+              "type": "heading",
+              "text": "Software (Perangkat Lunak)",
+              "level": 3
+            },
+            {
+              "type": "paragraph",
+              "text": "**Software** adalah kumpulan instruksi atau program yang menjalankan hardware. Tanpa software, hardware tidak dapat melakukan apapun yang berguna. Software dibedakan menjadi tiga kelompok utama:"
+            },
+            {
+              "type": "list",
+              "ordered": true,
+              "items": [
+                "Sistem Operasi — Windows, Linux, macOS, Android, iOS (mengelola sumber daya komputer)",
+                "Software Aplikasi — Microsoft Office, Photoshop, browser, game (untuk kebutuhan spesifik)",
+                "Software Utilitas — antivirus, disk cleaner, backup tools (untuk pemeliharaan sistem)"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "**Sistem operasi** adalah software yang paling fundamental — ia menjadi perantara antara user, aplikasi, dan hardware. Ketika Anda membuka browser, sistem operasi mengalokasikan memori, menjadwalkan CPU, dan menyediakan koneksi jaringan. Tanpa sistem operasi, komputer hanya akan menjadi tumpukan logam dan plastik tanpa nyawa."
+            },
+            {
+              "type": "quote",
+              "text": "Hardware without software is like a body without a soul.",
+              "author": "Prinsip dasar komputer"
+            }
+          ],
+          "poinPenting": [
+            "Hardware dikelompokkan: input, proses, output, penyimpanan",
+            "CPU = otak komputer, terdiri dari ALU dan Control Unit",
+            "RAM = memori sementara (volatile), Hard disk = memori permanen (non-volatile)",
+            "Software dibedakan: sistem operasi, aplikasi, utilitas",
+            "Sistem operasi mengelola sumber daya komputer"
+          ],
+          "kataKunci": [
+            "Hardware",
+            "Software",
+            "CPU",
+            "RAM",
+            "Sistem operasi",
+            "Volatile",
+            "Non-volatile"
+          ]
+        },
+        {
+          "id": "lesson-komputer-01-03",
+          "judul": "C. Pengenalan Jaringan Komputer",
+          "konten": [
+            {
+              "type": "paragraph",
+              "text": "Bayangkan Anda harus mengirim file dari satu komputer ke komputer lain yang jaraknya 100 meter. Anda bisa menggunakan flash drive — tapi itu memakan waktu dan tidak efisien. **Jaringan komputer** hadir sebagai solusi: menghubungkan dua atau lebih komputer agar dapat **berkomunikasi** dan **berbagi sumber daya** dengan cepat dan efisien."
+            },
+            {
+              "type": "paragraph",
+              "text": "Secara sederhana, **jaringan komputer** adalah kumpulan dua atau lebih perangkat komputer yang saling terhubung melalui media transmisi (kabel atau nirkabel) sehingga dapat bertukar data dan berbagi sumber daya seperti printer, file, atau koneksi internet. Tujuan utamanya adalah **komunikasi**, **berbagi sumber daya**, dan **integrasi data**."
+            },
+            {
+              "type": "heading",
+              "text": "Jenis Jaringan Berdasarkan Jangkauan",
+              "level": 3
+            },
+            {
+              "type": "paragraph",
+              "text": "Berdasarkan luas jangkauannya, jaringan komputer terbagi menjadi beberapa jenis. Masing-masing punya karakteristik, kecepatan, dan penggunaan yang berbeda."
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "PAN (Personal Area Network) — jangkauan 1-10 meter, contoh: Bluetooth, hotspot ponsel",
+                "LAN (Local Area Network) — jangkauan gedung, contoh: jaringan kantor, sekolah, warnet",
+                "MAN (Metropolitan Area Network) — jangkauan kota, contoh: jaringan antar kantor cabang di satu kota",
+                "WAN (Wide Area Network) — jangkauan negara/global, contoh: internet"
+              ]
+            },
+            {
+              "type": "callout",
+              "variant": "info",
+              "title": "Tahukah Kamu?",
+              "text": "**Internet** sebenarnya adalah kependekan dari *interconnected network* — jaringan yang menghubungkan jutaan jaringan di seluruh dunia. Ia adalah jaringan terbesar yang pernah dibuat manusia. Saat Anda membuka YouTube, data menempuh puluhan ribu kilometer melalui kabel bawah laut dalam hitungan detik."
+            },
+            {
+              "type": "heading",
+              "text": "Topologi Jaringan",
+              "level": 3
+            },
+            {
+              "type": "paragraph",
+              "text": "**Topologi jaringan** adalah cara komputer-komputer dalam jaringan saling terhubung. Ada beberapa topologi dasar yang perlu Anda ketahui:"
+            },
+            {
+              "type": "table",
+              "headers": [
+                "Topologi",
+                "Karakteristik",
+                "Kelebihan",
+                "Kekurangan"
+              ],
+              "rows": [
+                [
+                  "Star",
+                  "Semua perangkat terhubung ke satu pusat (switch/hub)",
+                  "Mudah dikelola, gangguan satu node tidak pengaruhi yang lain",
+                  "Jika pusat rusak, seluruh jaringan mati"
+                ],
+                [
+                  "Bus",
+                  "Semua perangkat terhubung ke satu kabel utama",
+                  "Hemat kabel, sederhana",
+                  "Gangguan di kabel utama matikan seluruh jaringan"
+                ],
+                [
+                  "Ring",
+                  "Perangkat terhubung melingkar seperti cincin",
+                  "Data mengalir teratur, tidak ada tabrakan data",
+                  "Gangguan satu node pengaruhi seluruh jaringan"
+                ],
+                [
+                  "Mesh",
+                  "Setiap perangkat terhubung ke semua perangkat lain",
+                  "Sangat andal, redundan",
+                  "Boros kabel, mahal"
+                ]
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Di dunia nyata, **topologi star** adalah yang paling banyak digunakan di kantor, sekolah, dan rumah — karena mudah dikelola dan relatif murah. Topologi **mesh** biasanya digunakan pada backbone internet — di mana keandalan sangat kritis. Topologi bus dan ring sudah jarang digunakan di era modern."
+            },
+            {
+              "type": "callout",
+              "variant": "success",
+              "title": "Kesimpulan",
+              "text": "Jaringan komputer adalah fondasi dari dunia digital modern. Memahami jenis-jenis dan topologinya adalah langkah awal untuk masuk ke dunia **teknologi jaringan** — bidang yang sangat dibutuhkan di era industri 4.0."
+            }
+          ],
+          "poinPenting": [
+            "Jaringan komputer: dua atau lebih perangkat yang saling terhubung untuk berkomunikasi dan berbagi sumber daya",
+            "Jenis jaringan: PAN, LAN, MAN, WAN (berdasarkan jangkauan)",
+            "Internet = interconnected network — jaringan terbesar di dunia",
+            "Topologi: star, bus, ring, mesh — masing-masing punya kelebihan dan kekurangan",
+            "Topologi star paling banyak digunakan karena mudah dikelola"
+          ],
+          "kataKunci": [
+            "Jaringan",
+            "PAN",
+            "LAN",
+            "MAN",
+            "WAN",
+            "Internet",
+            "Topologi",
+            "Star",
+            "Mesh"
+          ]
+        }
+      ],
+      "freeTest": {
+        "id": "free-komputer-01",
+        "questions": [
+          {
+            "id": "q-ft-komputer-01-01",
+            "pertanyaan": "Komponen komputer yang berupa manusia pengguna disebut...",
+            "options": [
+              {
+                "id": "A",
+                "text": "Hardware"
+              },
+              {
+                "id": "B",
+                "text": "Software"
+              },
+              {
+                "id": "C",
+                "text": "Brainware"
+              },
+              {
+                "id": "D",
+                "text": "Firmware"
+              }
+            ],
+            "correctOptionId": "C",
+            "pembahasan": "Brainware adalah manusia yang mengoperasikan komputer. Tiga komponen komputer: hardware, software, brainware.",
+            "moduleId": "komputer-01",
+            "concept": "Komponen komputer",
+            "difficulty": "easy"
+          },
+          {
+            "id": "q-ft-komputer-01-02",
+            "pertanyaan": "Siklus kerja dasar komputer adalah...",
+            "options": [
+              {
+                "id": "A",
+                "text": "Input → Output → Process"
+              },
+              {
+                "id": "B",
+                "text": "Input → Process → Output"
+              },
+              {
+                "id": "C",
+                "text": "Process → Input → Output"
+              },
+              {
+                "id": "D",
+                "text": "Output → Process → Input"
+              }
+            ],
+            "correctOptionId": "B",
+            "pembahasan": "Siklus dasar komputer adalah IPO: Input → Process → Output. Diperluas menjadi IPOS dengan tambahan Storage.",
+            "moduleId": "komputer-01",
+            "concept": "Siklus IPO",
+            "difficulty": "easy"
+          },
+          {
+            "id": "q-ft-komputer-01-03",
+            "pertanyaan": "Jaringan yang mencakup satu gedung sekolah disebut...",
+            "options": [
+              {
+                "id": "A",
+                "text": "PAN"
+              },
+              {
+                "id": "B",
+                "text": "LAN"
+              },
+              {
+                "id": "C",
+                "text": "MAN"
+              },
+              {
+                "id": "D",
+                "text": "WAN"
+              }
+            ],
+            "correctOptionId": "B",
+            "pembahasan": "LAN (Local Area Network) mencakup area lokal seperti gedung sekolah atau kantor.",
+            "moduleId": "komputer-01",
+            "concept": "Jenis jaringan",
+            "difficulty": "easy"
+          }
+        ]
+      },
+      "postTest": {
+        "id": "post-komputer-01",
+        "passingScore": 80,
+        "questions": [
+          {
+            "id": "q-pt-komputer-01-01",
+            "pertanyaan": "Bagian CPU yang menangani perhitungan matematika dan logika adalah...",
+            "options": [
+              {
+                "id": "A",
+                "text": "Control Unit"
+              },
+              {
+                "id": "B",
+                "text": "Arithmetic Logic Unit"
+              },
+              {
+                "id": "C",
+                "text": "Memory Unit"
+              },
+              {
+                "id": "D",
+                "text": "Register"
+              }
+            ],
+            "correctOptionId": "B",
+            "pembahasan": "ALU (Arithmetic Logic Unit) menangani perhitungan matematika dan logika. Control Unit mengatur alur instruksi.",
+            "moduleId": "komputer-01",
+            "concept": "Komponen CPU",
+            "difficulty": "medium"
+          },
+          {
+            "id": "q-pt-komputer-01-02",
+            "pertanyaan": "Memori komputer yang datanya hilang saat komputer dimatikan disebut...",
+            "options": [
+              {
+                "id": "A",
+                "text": "Volatile"
+              },
+              {
+                "id": "B",
+                "text": "Non-volatile"
+              },
+              {
+                "id": "C",
+                "text": "Permanent"
+              },
+              {
+                "id": "D",
+                "text": "Static"
+              }
+            ],
+            "correctOptionId": "A",
+            "pembahasan": "RAM bersifat volatile — datanya hilang saat komputer dimatikan. Hard disk bersifat non-volatile.",
+            "moduleId": "komputer-01",
+            "concept": "Jenis memori",
+            "difficulty": "medium"
+          },
+          {
+            "id": "q-pt-komputer-01-03",
+            "pertanyaan": "Berikut yang termasuk software sistem operasi adalah...",
+            "options": [
+              {
+                "id": "A",
+                "text": "Microsoft Word"
+              },
+              {
+                "id": "B",
+                "text": "Adobe Photoshop"
+              },
+              {
+                "id": "C",
+                "text": "Linux"
+              },
+              {
+                "id": "D",
+                "text": "Google Chrome"
+              }
+            ],
+            "correctOptionId": "C",
+            "pembahasan": "Linux adalah sistem operasi. Microsoft Word, Photoshop, dan Chrome adalah software aplikasi.",
+            "moduleId": "komputer-01",
+            "concept": "Jenis software",
+            "difficulty": "easy"
+          },
+          {
+            "id": "q-pt-komputer-01-04",
+            "pertanyaan": "Topologi jaringan di mana semua perangkat terhubung ke satu pusat (switch/hub) disebut topologi...",
+            "options": [
+              {
+                "id": "A",
+                "text": "Bus"
+              },
+              {
+                "id": "B",
+                "text": "Ring"
+              },
+              {
+                "id": "C",
+                "text": "Star"
+              },
+              {
+                "id": "D",
+                "text": "Mesh"
+              }
+            ],
+            "correctOptionId": "C",
+            "pembahasan": "Topologi star: semua perangkat terhubung ke pusat (switch/hub). Paling banyak digunakan karena mudah dikelola.",
+            "moduleId": "komputer-01",
+            "concept": "Topologi jaringan",
+            "difficulty": "medium"
+          },
+          {
+            "id": "q-pt-komputer-01-05",
+            "pertanyaan": "Jaringan komputer yang mencakup area satu negara atau global disebut...",
+            "options": [
+              {
+                "id": "A",
+                "text": "PAN"
+              },
+              {
+                "id": "B",
+                "text": "LAN"
+              },
+              {
+                "id": "C",
+                "text": "MAN"
+              },
+              {
+                "id": "D",
+                "text": "WAN"
+              }
+            ],
+            "correctOptionId": "D",
+            "pembahasan": "WAN (Wide Area Network) mencakup area luas seperti negara atau global. Contoh: internet.",
+            "moduleId": "komputer-01",
+            "concept": "Jenis jaringan",
+            "difficulty": "easy"
+          }
+        ]
+      },
+      "finalQuestionIds": [
+        "q-f-komputer-001",
+        "q-f-komputer-002",
+        "q-f-komputer-003"
+      ]
+    }
+  ],
+  "finalTest": null
+}

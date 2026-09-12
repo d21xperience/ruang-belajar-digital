@@ -1,0 +1,55 @@
+{
+    "tourVersion": 1,
+    "storageKey": "ppkn-tour-materi",
+    "steps": [
+        {
+            "id": "materi-welcome",
+            "title": "Selamat Datang di Modul Belajar 📖",
+            "description": "Halaman ini adalah tempat Anda mempelajari materi, mengerjakan kuis, dan mengunduh materi sebagai PDF. Mari kita lihat fitur-fiturnya dalam 30 detik.",
+            "target": null,
+            "placement": "center"
+        },
+        {
+            "id": "materi-stepper",
+            "title": "Alur Belajar Anda",
+            "description": "Stepper ini menunjukkan posisi Anda saat ini. Alurnya: Free Test (diagnostik) → Materi (belajar) → Post Test (uji penguasaan). Lulus Post Test dengan KKM 80 untuk membuka modul berikutnya.",
+            "target": "[data-tour-materi='stepper']",
+            "placement": "bottom"
+        },
+        {
+            "id": "materi-content",
+            "title": "Konten Materi",
+            "description": "Di sini Anda membaca materi. Bisa berisi teks, gambar, video, audio, dan rumus matematika. Scroll ke bawah jika materi panjang. Klik 'Sudah Paham, Lanjutkan' untuk pindah ke bagian berikutnya.",
+            "target": "[data-tour-materi='content']",
+            "placement": "top"
+        },
+        {
+            "id": "materi-nav",
+            "title": "Navigasi Antar Bagian",
+            "description": "Gunakan tombol 'Sebelumnya' dan 'Sudah Paham' untuk berpindah antar bagian materi. Anda juga bisa membuka daftar isi di pojok kiri (atau ikon menu di HP) untuk melompat langsung ke bagian tertentu.",
+            "target": "[data-tour-materi='nav']",
+            "placement": "top"
+        },
+        {
+            "id": "materi-pdf",
+            "title": "Download Materi sebagai PDF 📄",
+            "description": "Ingin membaca offline atau mencetak? Klik tombol PDF ini. Pilih 'Bagian Ini Saja' atau 'Seluruh Modul'. Di dialog print, pilih 'Save as PDF' sebagai tujuan. PDF berisi teks asli yang bisa dicari dan disalin.",
+            "target": "[data-tour-materi='pdf-btn']",
+            "placement": "top"
+        },
+        {
+            "id": "materi-quiz",
+            "title": "Free Test & Post Test",
+            "description": "Free Test adalah tes diagnostik (boleh diulang, tidak menentukan kelulusan). Post Test menentukan kelulusan modul dengan KKM 80. Setiap kuis bisa diulang sesering yang Anda butuhkan. Kunci jawaban tetap akurat meskipun soal dan pilihan diacak.",
+            "target": "[data-tour-materi='stepper']",
+            "placement": "bottom"
+        },
+        {
+            "id": "materi-finish",
+            "title": "Selamat Belajar! 🎓",
+            "description": "Anda sudah siap. Mulai dengan mengerjakan Free Test untuk melihat pengetahuan awal Anda, lalu baca materi, dan akhiri dengan Post Test. Jika skor belum mencapai KKM, jangan menyerah — Anda bisa mengulang kapan saja!",
+            "target": null,
+            "placement": "center"
+        }
+    ]
+}

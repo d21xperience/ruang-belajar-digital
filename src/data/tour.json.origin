@@ -1,0 +1,61 @@
+{
+    "tourVersion": 1,
+    "steps": [
+        {
+            "id": "welcome",
+            "title": "Selamat Datang di E-Modul PPKn! 👋",
+            "description": "Aplikasi ini akan memandu Anda belajar Pendidikan Pancasila secara bertahap. Mari kita lihat sekilas apa saja fiturnya. Tour ini hanya butuh 1 menit.",
+            "target": null,
+            "placement": "center"
+        },
+        {
+            "id": "hero",
+            "title": "Ruang Belajar Anda",
+            "description": "Di sini Anda bisa mulai belajar. Setiap modul mengikuti alur: Free Test → Materi → Post Test. Lulus Post Test dengan KKM 80 untuk membuka modul berikutnya.",
+            "target": "[data-tour='hero']",
+            "placement": "bottom"
+        },
+        {
+            "id": "progress",
+            "title": "Pantau Progres Anda",
+            "description": "Panel ini menunjukkan berapa modul yang sudah Anda selesaikan. Setiap kotak mewakili satu modul — akan berubah warna emas saat Anda lulus.",
+            "target": "[data-tour='progress']",
+            "placement": "left"
+        },
+        {
+            "id": "modules",
+            "title": "Daftar Modul",
+            "description": "5 modul menanti Anda. Modul 1 terbuka dari awal, modul berikutnya terbuka setelah Anda lulus modul sebelumnya. Klik untuk mulai belajar.",
+            "target": "[data-tour='modules']",
+            "placement": "top"
+        },
+        {
+            "id": "analitik",
+            "title": "Lihat Analisis Belajar",
+            "description": "Setelah beberapa tes, Anda bisa lihat grafik perkembangan skor, penguasaan per modul, dan rekomendasi materi yang perlu di-review.",
+            "target": "[data-tour='nav-analitik']",
+            "placement": "bottom"
+        },
+        {
+            "id": "faq",
+            "title": "Ada Pertanyaan?",
+            "description": "Kunjungi halaman FAQ untuk menemukan jawaban atas pertanyaan yang sering diajukan tentang cara belajar, kuis, PDF, offline mode, dan lainnya.",
+            "target": "[data-tour='nav-faq']",
+            "placement": "bottom"
+        },
+        {
+            "id": "install",
+            "title": "Install di Home Screen 📱",
+            "description": "Anda bisa install aplikasi ini ke layar utama HP/Laptop seperti aplikasi biasa. Setelah terinstall, materi & kuis tetap dapat diakses tanpa internet.",
+            "target": "[data-tour='nav-install']",
+            "placement": "bottom"
+        },
+        {
+            "id": "finish",
+            "title": "Siap Memulai! 🚀",
+            "description": "Anda sudah siap. Mulai dari Modul 1, kerjakan Free Test dulu untuk melihat pengetahuan awal Anda. Selamat belajar!",
+            "target": null,
+            "placement": "center"
+        }
+    ]
+}

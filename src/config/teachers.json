@@ -1,0 +1,21 @@
+{
+    "_note": "Ganti passwordHash dengan hasil SHA-256 dari password Anda. Lihat instruksi setup di dokumentasi.",
+    "teachers": [
+        {
+            "id": "t-001",
+            "username": "deden",
+            "passwordHash": "cef94b29fbce39dbd3e66cf026315832b802963a311451474a024ad60f888f69",
+            "nama": "Deden Moh Jaenudin, S.H.",
+            "role": "admin",
+            "active": true
+        },
+        {
+            "id": "t-002",
+            "username": "guru",
+            "passwordHash": "13b839c3b9e08793afcf13b03d1b34b418c4aabca69b9157bf5ef22a4ca40713",
+            "nama": "Guru Pendamping",
+            "role": "teacher",
+            "active": true
+        }
+    ]
+}

@@ -1,0 +1,472 @@
+{
+    "contentVersion": "1.0.0",
+    "subjectId": "hukum",
+    "updatedAt": "2026-09-12",
+    "modules": [
+        {
+            "id": "hukum-01",
+            "urutan": 1,
+            "judul": "Pengantar Ilmu Hukum",
+            "judulShort": "Modul 1",
+            "deskripsi": "Mengenal hakikat hukum, sumber-sumber hukum di Indonesia, serta tujuan dan fungsi hukum dalam kehidupan bermasyarakat.",
+            "tujuanPembelajaran": [
+                "Menjelaskan pengertian dan hakikat hukum secara komprehensif",
+                "Mengidentifikasi sumber-sumber hukum di Indonesia",
+                "Memahami tujuan dan fungsi hukum dalam kehidupan sosial"
+            ],
+            "passingScore": 80,
+            "sections": [
+                {
+                    "id": "lesson-01-01",
+                    "judul": "A. Pengertian dan Hakikat Hukum",
+                    "konten": [
+                        {
+                            "type": "paragraph",
+                            "text": "Kata **hukum** dalam bahasa Indonesia berasal dari bahasa Arab *hukm* yang berarti 'putusan' atau 'ketetapan'. Dalam bahasa Inggris dikenal istilah *law*, dalam bahasa Belanda *recht*, dan dalam bahasa Latin *jus* atau *lex*. Semua istilah ini pada dasarnya merujuk pada aturan yang mengikat dan mengatur perilaku manusia dalam kehidupan bersama."
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Meskipun banyak ahli telah merumuskan definisi hukum, hingga kini belum ada satu definisi yang diterima oleh semua pihak. Hal ini karena hukum memiliki banyak dimensi: sebagai aturan, sebagai sistem, sebagai gejala sosial, dan sebagai alat rekayasa masyarakat. Karena itu, para ahli sering menyebut hukum sebagai *'open texture'* — konsep yang terus berkembang seiring perubahan zaman."
+                        },
+                        {
+                            "type": "callout",
+                            "variant": "info",
+                            "title": "Definisi Hukum Menurut Para Ahli",
+                            "text": "**Prof. Dr. Soerjono Soekanto**: Hukum adalah kaidah atau norma yang mengikat dan memaksa, yang bertujuan untuk mengatur perilaku manusia dalam kehidupan bermasyarakat. **Prof. Mr. E. Utrecht**: Hukum adalah himpunan peraturan-peraturan yang mengurus tata tertib suatu masyarakat dan karena itu harus ditaati oleh masyarakat. **Van Kan**: Hukum adalah keseluruhan peraturan hidup yang bersifat memaksa untuk melindungi kepentingan manusia dalam masyarakat."
+                        },
+                        {
+                            "type": "heading",
+                            "text": "Unsur-Unsur Hukum",
+                            "level": 3
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Dari berbagai definisi tersebut, kita dapat menarik empat unsur utama hukum. **Pertama**, hukum adalah **peraturan** — seperangkat kaidah yang mengatur perilaku. **Kedua**, hukum bersifat **mengikat dan memaksa** — setiap orang wajib menaatinya. **Ketiga**, hukum mengatur **kehidupan bermasyarakat** — bukan urusan pribadi semata. **Keempat**, hukum dibuat oleh **pihak berwenang** — negara, masyarakat, atau adat yang diakui."
+                        },
+                        {
+                            "type": "list",
+                            "ordered": true,
+                            "items": [
+                                "Peraturan — kaidah yang mengatur perilaku manusia",
+                                "Mengikat dan memaksa — ada sanksi bagi pelanggar",
+                                "Mengatur kehidupan bersama — bukan urusan pribadi",
+                                "Dibuat pihak berwenang — negara, masyarakat, atau adat"
+                            ]
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Sifat **mengikat dan memaksa** inilah yang membedakan hukum dari norma sosial lainnya. Norma agama, norma kesusilaan, dan norma kesopanan juga mengatur perilaku — tetapi sanksi atas pelanggarannya bersifat moral atau sosial. Hukum memiliki sanksi yang **tegas, jelas, dan dapat dipaksakan oleh negara** melalui aparat penegak hukum."
+                        },
+                        {
+                            "type": "callout",
+                            "variant": "warning",
+                            "title": "Jangan Tertukar!",
+                            "text": "Norma **kesopanan** mengatur sopan-santik; pelanggarannya disanksi berupa celaan sosial. Norma **hukum** mengatur hal yang lebih tegas; pelanggarannya disanksi berupa denda, penjara, atau sanksi administratif. Karena itu, tidak semua perilaku tidak sopan otomatis merupakan pelanggaran hukum."
+                        }
+                    ],
+                    "poinPenting": [
+                        "Hukum berasal dari bahasa Arab 'hukm' yang berarti putusan atau ketetapan",
+                        "Belum ada definisi hukum yang diterima semua pihak karena hukum bersifat open texture",
+                        "Unsur hukum: peraturan, mengikat dan memaksa, mengatur kehidupan bersama, dibuat pihak berwenang",
+                        "Sifat mengikat dan memaksa membedakan hukum dari norma sosial lain"
+                    ],
+                    "kataKunci": [
+                        "Hukum",
+                        "Hukm",
+                        "Norma",
+                        "Soerjono Soekanto",
+                        "Utrecht",
+                        "Van Kan",
+                        "Open texture"
+                    ]
+                },
+                {
+                    "id": "lesson-01-02",
+                    "judul": "B. Sumber-Sumber Hukum di Indonesia",
+                    "konten": [
+                        {
+                            "type": "paragraph",
+                            "text": "Setiap negara memiliki **sumber hukum** — yaitu tempat dari mana aturan hukum berasal dan dapat ditemukan. Sumber hukum terbagi menjadi dua kelompok besar: **sumber hukum material** dan **sumber hukum formal**. Memahami keduanya penting agar kita tahu dari mana sebuah aturan berasal dan bagaimana ia dapat ditemukan."
+                        },
+                        {
+                            "type": "heading",
+                            "text": "1. Sumber Hukum Material",
+                            "level": 3
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Sumber hukum **material** adalah faktor-faktor yang mempengaruhi isi hukum. Ia menjawab pertanyaan: *'mengapa sebuah hukum berisi aturan tertentu?'*. Faktor-faktor ini bisa berupa nilai-nilai budaya, agama, kondisi ekonomi, politik, sosial, atau perkembangan masyarakat. Contoh: hukum tentang perlindungan anak lahir karena kesadaran bahwa anak adalah aset bangsa yang perlu dilindungi. Hukum tentang lingkungan hidup lahir karena keprihatinan terhadap kerusakan alam."
+                        },
+                        {
+                            "type": "heading",
+                            "text": "2. Sumber Hukum Formal",
+                            "level": 3
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Sumber hukum **formal** adalah bentuk atau cara hukum itu diwujudkan, sehingga dapat mengikat secara resmi. Ia menjawab pertanyaan: *'di mana hukum itu dapat ditemukan?'*. Di Indonesia, sumber hukum formal mencakup beberapa bentuk berikut:"
+                        },
+                        {
+                            "type": "list",
+                            "ordered": true,
+                            "items": [
+                                "Undang-Undang — aturan yang dibuat DPR bersama Presiden",
+                                "Kebiasaan (custom) — perilaku yang terus-menerus diulang dan diterima sebagai hukum",
+                                "Yurisprudensi — putusan hakim terdahulu yang menjadi pedoman untuk kasus serupa",
+                                "Traktat — perjanjian internasional yang diratifikasi Indonesia",
+                                "Doktrin — pendapat para ahli hukum yang berpengaruh"
+                            ]
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Di Indonesia, hierarki sumber hukum formal diatur dalam **UU No. 12 Tahun 2011 tentang Pembentukan Peraturan Perundang-undangan**. Urutannya dari yang tertinggi: (1) UUD 1945, (2) Ketetapan MPR, (3) UU / Perppu, (4) Peraturan Pemerintah, (5) Peraturan Presiden, (6) Peraturan Daerah Provinsi, (7) Peraturan Daerah Kabupaten/Kota."
+                        },
+                        {
+                            "type": "callout",
+                            "variant": "info",
+                            "title": "Hierarki Perundang-undangan",
+                            "text": "Peraturan yang lebih rendah **tidak boleh bertentangan** dengan yang lebih tinggi. Jika bertentangan, peraturan yang lebih rendah dapat dibatalkan. Prinsip ini disebut **lex superior derogat legi inferiori** (hukum yang lebih tinggi mengesampingkan hukum yang lebih rendah)."
+                        },
+                        {
+                            "type": "quote",
+                            "text": "Ubi societas, ibi ius",
+                            "author": "Pepatah Romawi kuno — 'Di mana ada masyarakat, di situ ada hukum'"
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Pepatah Romawi di atas mengajarkan bahwa **hukum selalu ada di setiap masyarakat**. Bahkan masyarakat yang paling sederhana pun memiliki aturan yang mengikat. Yang membedakan hanya bentuk, kompleksitas, dan cara penegakannya."
+                        }
+                    ],
+                    "poinPenting": [
+                        "Sumber hukum material = faktor yang mempengaruhi isi hukum (budaya, agama, ekonomi)",
+                        "Sumber hukum formal = bentuk/wujud hukum yang mengikat (UU, kebiasaan, yurisprudensi, traktat, doktrin)",
+                        "Hierarki perundang-undangan diatur dalam UU No. 12 Tahun 2011",
+                        "Prinsip lex superior derogat legi inferiori: peraturan yang lebih tinggi mengesampingkan yang lebih rendah",
+                        "Ubi societas ibi ius: di mana ada masyarakat, di situ ada hukum"
+                    ],
+                    "kataKunci": [
+                        "Sumber hukum material",
+                        "Sumber hukum formal",
+                        "UU No. 12 Tahun 2011",
+                        "Hierarki",
+                        "Yurisprudensi",
+                        "Traktat",
+                        "Doktrin",
+                        "Lex superior"
+                    ]
+                },
+                {
+                    "id": "lesson-01-03",
+                    "judul": "C. Tujuan dan Fungsi Hukum",
+                    "konten": [
+                        {
+                            "type": "paragraph",
+                            "text": "Hukum tidak ada tanpa tujuan. Ia diciptakan untuk membawa **keteraturan** dalam kehidupan bersama. Tanpa hukum, masyarakat akan berada dalam kondisi yang oleh filsuf Thomas Hobbes disebut *bellum omnium contra omnes* — 'perang semua melawan semua'. Hukum hadir untuk mencegah kondisi ini, dengan menetapkan apa yang boleh dan tidak boleh dilakukan."
+                        },
+                        {
+                            "type": "heading",
+                            "text": "Tujuan Hukum",
+                            "level": 3
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Secara umum, tujuan hukum mencakup tiga hal pokok yang dirumuskan oleh **Gustav Radbruch**, seorang filsuf hukum Jerman: **keadilan** (*Gerechtigkeit*), **kepastian** (*Rechtssicherheit*), dan **kemanfaatan** (*Zweckmässigkeit*)."
+                        },
+                        {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                                "Keadilan — setiap orang diperlakukan sesuai haknya, tidak ada diskriminasi",
+                                "Kepastian — aturan yang jelas dan dapat diprediksi, sehingga orang tahu apa yang boleh dan tidak",
+                                "Kemanfaatan — hukum harus membawa manfaat nyata bagi masyarakat"
+                            ]
+                        },
+                        {
+                            "type": "callout",
+                            "variant": "warning",
+                            "title": "Ketegangan Antar Tujuan",
+                            "text": "Ketiga tujuan ini sering **saling bertentangan**. Contoh: hukum yang terlalu mengutamakan kepastian bisa jadi tidak adil (misalnya kaku pada satu tafsir). Hukum yang terlalu mengutamakan keadilan bisa jadi tidak pasti (misalnya hakim terlalu bebas menafsir). Hukum yang terlalu mengutamakan kemanfaatan bisa mengorbankan keadilan. Karena itu, hakim dan pembuat UU perlu menyeimbangkan ketiganya."
+                        },
+                        {
+                            "type": "heading",
+                            "text": "Fungsi Hukum",
+                            "level": 3
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Selain memiliki tujuan, hukum juga memiliki **fungsi** dalam masyarakat. Fungsi-fungsi ini bersifat praktis dan dapat dirasakan langsung dalam kehidupan sehari-hari."
+                        },
+                        {
+                            "type": "list",
+                            "ordered": true,
+                            "items": [
+                                "Fungsi pengaturan — menetapkan aturan main dalam masyarakat",
+                                "Fungsi perlindungan — melindungi hak dan kepentingan warga negara",
+                                "Fungsi penyelesaian sengketa — menjadi mekanisme damai untuk menyelesaikan konflik",
+                                "Fungsi rekayasa sosial — mendorong perubahan sosial ke arah yang lebih baik",
+                                "Fungsi pendidikan — mengajarkan nilai-nilai yang dianggap baik oleh masyarakat"
+                            ]
+                        },
+                        {
+                            "type": "paragraph",
+                            "text": "Contoh fungsi **rekayasa sosial** dapat dilihat pada UU Perlindungan Konsumen. UU ini tidak hanya melindungi konsumen, tetapi juga mendorong pelaku usaha untuk lebih transparan dan bertanggung jawab. Contoh fungsi **pendidikan** dapat dilihat pada UU Lalu Lintas — mengajarkan disiplin dan keselamatan di jalan raya."
+                        },
+                        {
+                            "type": "callout",
+                            "variant": "success",
+                            "title": "Kesimpulan",
+                            "text": "Hukum bukan sekadar kumpulan pasal dan ayat. Ia adalah **sistem hidup** yang melayani masyarakat — menetapkan aturan, melindungi hak, menyelesaikan konflik, mendorong perubahan, dan mendidik nilai. Karena itu, memahami hukum berarti memahami cara hidup bersama secara tertib dan adil."
+                        }
+                    ],
+                    "poinPenting": [
+                        "Tujuan hukum menurut Gustav Radbruch: keadilan, kepastian, dan kemanfaatan",
+                        "Ketiga tujuan sering bertentangan — hakim perlu menyeimbangkan",
+                        "Fungsi hukum: pengaturan, perlindungan, penyelesaian sengketa, rekayasa sosial, pendidikan",
+                        "Hukum bukan sekadar pasal — tapi sistem hidup yang melayani masyarakat"
+                    ],
+                    "kataKunci": [
+                        "Gustav Radbruch",
+                        "Keadilan",
+                        "Kepastian",
+                        "Kemanfaatan",
+                        "Fungsi hukum",
+                        "Rekayasa sosial"
+                    ]
+                }
+            ],
+            "freeTest": {
+                "id": "free-hukum-01",
+                "questions": [
+                    {
+                        "id": "q-ft-hukum-01-01",
+                        "pertanyaan": "Kata 'hukum' dalam bahasa Arab berasal dari kata...",
+                        "options": [
+                            {
+                                "id": "A",
+                                "text": "Hukm"
+                            },
+                            {
+                                "id": "B",
+                                "text": "Jus"
+                            },
+                            {
+                                "id": "C",
+                                "text": "Lex"
+                            },
+                            {
+                                "id": "D",
+                                "text": "Recht"
+                            }
+                        ],
+                        "correctOptionId": "A",
+                        "pembahasan": "Kata hukum berasal dari bahasa Arab 'hukm' yang berarti putusan atau ketetapan.",
+                        "moduleId": "hukum-01",
+                        "concept": "Asal kata hukum",
+                        "difficulty": "easy"
+                    },
+                    {
+                        "id": "q-ft-hukum-01-02",
+                        "pertanyaan": "Di mana masyarakat, di situ ada hukum — merupakan arti dari pepatah...",
+                        "options": [
+                            {
+                                "id": "A",
+                                "text": "Lex superior derogat legi inferiori"
+                            },
+                            {
+                                "id": "B",
+                                "text": "Ubi societas ibi ius"
+                            },
+                            {
+                                "id": "C",
+                                "text": "Bellum omnium contra omnes"
+                            },
+                            {
+                                "id": "D",
+                                "text": "Ignorantia juris non excusat"
+                            }
+                        ],
+                        "correctOptionId": "B",
+                        "pembahasan": "Ubi societas ibi ius berarti 'di mana ada masyarakat, di situ ada hukum'.",
+                        "moduleId": "hukum-01",
+                        "concept": "Pepatah hukum",
+                        "difficulty": "easy"
+                    },
+                    {
+                        "id": "q-ft-hukum-01-03",
+                        "pertanyaan": "Sumber hukum yang menjawab pertanyaan 'dari mana hukum dapat ditemukan' disebut sumber hukum...",
+                        "options": [
+                            {
+                                "id": "A",
+                                "text": "Material"
+                            },
+                            {
+                                "id": "B",
+                                "text": "Formal"
+                            },
+                            {
+                                "id": "C",
+                                "text": "Filosofis"
+                            },
+                            {
+                                "id": "D",
+                                "text": "Sosiologis"
+                            }
+                        ],
+                        "correctOptionId": "B",
+                        "pembahasan": "Sumber hukum formal adalah bentuk/wujud hukum yang mengikat, tempat hukum dapat ditemukan.",
+                        "moduleId": "hukum-01",
+                        "concept": "Sumber hukum formal",
+                        "difficulty": "medium"
+                    }
+                ]
+            },
+            "postTest": {
+                "id": "post-hukum-01",
+                "passingScore": 80,
+                "questions": [
+                    {
+                        "id": "q-pt-hukum-01-01",
+                        "pertanyaan": "Berikut yang BUKAN termasuk unsur hukum adalah...",
+                        "options": [
+                            {
+                                "id": "A",
+                                "text": "Peraturan yang mengatur perilaku"
+                            },
+                            {
+                                "id": "B",
+                                "text": "Bersifat mengikat dan memaksa"
+                            },
+                            {
+                                "id": "C",
+                                "text": "Dibuat oleh pihak berwenang"
+                            },
+                            {
+                                "id": "D",
+                                "text": "Ditujukan untuk kepentingan individu semata"
+                            }
+                        ],
+                        "correctOptionId": "D",
+                        "pembahasan": "Hukum mengatur kehidupan bermasyarakat, bukan hanya kepentingan individu. Kepentingan pribadi tetap dilindungi, tapi dalam kerangka kehidupan bersama.",
+                        "moduleId": "hukum-01",
+                        "concept": "Unsur-unsur hukum",
+                        "difficulty": "medium"
+                    },
+                    {
+                        "id": "q-pt-hukum-01-02",
+                        "pertanyaan": "Prinsip 'lex superior derogat legi inferiori' berarti...",
+                        "options": [
+                            {
+                                "id": "A",
+                                "text": "Hukum yang lebih rendah mengesampingkan yang lebih tinggi"
+                            },
+                            {
+                                "id": "B",
+                                "text": "Hukum yang lebih tinggi mengesampingkan yang lebih rendah"
+                            },
+                            {
+                                "id": "C",
+                                "text": "Hukum berlaku surut ke belakang"
+                            },
+                            {
+                                "id": "D",
+                                "text": "Hukum khusus mengesampingkan hukum umum"
+                            }
+                        ],
+                        "correctOptionId": "B",
+                        "pembahasan": "Lex superior derogat legi inferiori = hukum yang lebih tinggi mengesampingkan hukum yang lebih rendah. Ini salah satu asas dalam hierarki perundang-undangan.",
+                        "moduleId": "hukum-01",
+                        "concept": "Asas hierarki hukum",
+                        "difficulty": "medium"
+                    },
+                    {
+                        "id": "q-pt-hukum-01-03",
+                        "pertanyaan": "Menurut Gustav Radbruch, tujuan hukum adalah...",
+                        "options": [
+                            {
+                                "id": "A",
+                                "text": "Keadilan, kepastian, dan kemanfaatan"
+                            },
+                            {
+                                "id": "B",
+                                "text": "Kekuasaan, ketaatan, dan sanksi"
+                            },
+                            {
+                                "id": "C",
+                                "text": "Kebebasan, kesetaraan, dan persaudaraan"
+                            },
+                            {
+                                "id": "D",
+                                "text": "Pendidikan, penelitian, dan pengabdian"
+                            }
+                        ],
+                        "correctOptionId": "A",
+                        "pembahasan": "Gustav Radbruch merumuskan tiga tujuan hukum: keadilan (Gerechtigkeit), kepastian (Rechtssicherheit), dan kemanfaatan (Zweckmässigkeit).",
+                        "moduleId": "hukum-01",
+                        "concept": "Tujuan hukum Radbruch",
+                        "difficulty": "medium"
+                    },
+                    {
+                        "id": "q-pt-hukum-01-04",
+                        "pertanyaan": "Fungsi hukum yang mendorong perubahan sosial ke arah yang lebih baik disebut fungsi...",
+                        "options": [
+                            {
+                                "id": "A",
+                                "text": "Pengaturan"
+                            },
+                            {
+                                "id": "B",
+                                "text": "Perlindungan"
+                            },
+                            {
+                                "id": "C",
+                                "text": "Rekayasa sosial"
+                            },
+                            {
+                                "id": "D",
+                                "text": "Pendidikan"
+                            }
+                        ],
+                        "correctOptionId": "C",
+                        "pembahasan": "Fungsi rekayasa sosial (social engineering) adalah fungsi hukum untuk mendorong perubahan masyarakat ke arah yang lebih baik, misalnya UU Perlindungan Konsumen.",
+                        "moduleId": "hukum-01",
+                        "concept": "Fungsi hukum",
+                        "difficulty": "medium"
+                    },
+                    {
+                        "id": "q-pt-hukum-01-05",
+                        "pertanyaan": "Hierarki peraturan perundang-undangan di Indonesia diatur dalam...",
+                        "options": [
+                            {
+                                "id": "A",
+                                "text": "UUD 1945 Pasal 1"
+                            },
+                            {
+                                "id": "B",
+                                "text": "UU No. 12 Tahun 2011"
+                            },
+                            {
+                                "id": "C",
+                                "text": "Perpres No. 1 Tahun 2020"
+                            },
+                            {
+                                "id": "D",
+                                "text": "TAP MPR No. III/MPR/2000"
+                            }
+                        ],
+                        "correctOptionId": "B",
+                        "pembahasan": "Hierarki peraturan perundang-undangan di Indonesia diatur dalam UU No. 12 Tahun 2011 tentang Pembentukan Peraturan Perundang-undangan.",
+                        "moduleId": "hukum-01",
+                        "concept": "Hierarki perundang-undangan",
+                        "difficulty": "medium"
+                    }
+                ]
+            },
+            "finalQuestionIds": [
+                "q-f-hukum-001",
+                "q-f-hukum-002",
+                "q-f-hukum-003"
+            ]
+        }
+    ],
+    "finalTest": null
+}

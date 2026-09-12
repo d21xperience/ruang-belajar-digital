@@ -1,0 +1,1252 @@
+<route lang="yaml">
+meta:
+  requiresAuth: true
+</route>
+
+<template>
+  <q-page class="builder-page">
+    <div class="builder-wrap">
+      <div class="builder-topbar">
+        <q-btn flat dense icon="arrow_back" label="Kembali ke Beranda" @click="$router.push('/')" />
+        <div class="topbar-right">
+          <span class="mono-tag builder-version">
+            Content v{{ workingContent.contentVersion }} ·
+            {{ workingContent.modules.length }} modul
+          </span>
+          <q-btn flat dense icon="logout" label="Logout" color="negative" @click="confirmLogout" />
+        </div>
+      </div>
+
+      <h1 class="builder-title">Content Builder</h1>
+      <p class="builder-subtitle">
+        Editor materi & soal E-Modul PPKn. Gunakan
+        <b>Form Editor</b> untuk mengedit secara grafis, atau
+        <b>Paste Text</b> untuk memuat dari teks terstruktur.
+      </p>
+
+      <q-tabs v-model="tab" dense class="q-mb-md builder-tabs" align="left">
+        <q-tab name="form" icon="edit_note" label="Form Editor" />
+        <q-tab name="preview" icon="visibility" label="Preview" />
+        <q-tab name="media" icon="perm_media" label="Media" />
+        <q-tab name="final" icon="flag" label="Final Test" />
+        <q-tab name="paste" icon="content_paste" label="Paste Text" />
+        <q-tab name="json" icon="code" label="JSON Preview" />
+        <q-tab name="validate" icon="check_circle" label="Validasi" />
+      </q-tabs>
+
+      <q-tab-panels v-model="tab" animated keep-alive>
+
+        <!-- ═══════════════ TAB: FORM EDITOR ═══════════════ -->
+        <q-tab-panel name="form">
+          <div v-if="!workingContent.modules.length" class="empty-state">
+            <q-icon name="inbox" size="40px" color="grey-5" />
+            <p>Belum ada modul. Tambahkan modul pertama untuk memulai.</p>
+            <q-btn class="btn-primary-tech" unelevated icon="add" label="Tambah Modul" @click="addModule" />
+          </div>
+
+          <div v-else class="form-editor">
+            <div class="editor-sidebar">
+              <ModuleListSidebar :modules="workingContent.modules" :active-index="activeModuleIndex"
+                @select="(i) => activeModuleIndex = i" @add-module="addModule" @delete="deleteModule"
+                @reorder="reorderModule" />
+            </div>
+
+            <div v-if="activeModule" class="editor-panel">
+              <ModuleMetaForm :module="activeModule" @update="({ key, value }) => updateModule(key, value)" />
+              <q-expansion-item icon="help_outline" label="Panduan Penulisan Teks (Markdown + KaTeX)"
+                caption="Klik untuk melihat sintaks" class="syntax-help q-mb-md">
+                <div class="syntax-content">
+                  <div class="syntax-row">
+                    <code>**teks**</code>
+                    <span>→ <strong>teks tebal</strong></span>
+                  </div>
+                  <div class="syntax-row">
+                    <code>*teks*</code>
+                    <span>→ <em>teks miring</em></span>
+                  </div>
+                  <div class="syntax-row">
+                    <code>__teks__</code>
+                    <span>→ <u>teks bergaris bawah</u></span>
+                  </div>
+                  <div class="syntax-row">
+                    <code>~~teks~~</code>
+                    <span>→ <s>teks dicoret</s></span>
+                  </div>
+                  <div class="syntax-row">
+                    <code>`kode`</code>
+                    <span>→ <code>kode</code></span>
+                  </div>
+                  <div class="syntax-row">
+                    <code>$x^2 + y^2$</code>
+                    <span>→ rumus inline: $x^2 + y^2$</span>
+                  </div>
+                  <div class="syntax-row">
+                    <code>$$\frac{a}{b}$$</code>
+                    <span>→ rumus block (baris sendiri)</span>
+                  </div>
+                  <div class="syntax-row">
+                    <code>$\alpha, \pi, \sum, \int$</code>
+                    <span>→ simbol Yunani: $\alpha, \pi, \sum, \int$</span>
+                  </div>
+                  <div class="syntax-row">
+                    <code>[teks](https://...)</code>
+                    <span>→ link</span>
+                  </div>
+                </div>
+              </q-expansion-item>
+              <q-expansion-item icon="help_outline" label="Panduan URL Media" class="syntax-help q-mb-md">
+                <div class="syntax-content">
+                  <div class="syntax-section">
+                    <div class="mono-tag">🖼 GAMBAR</div>
+                    <div class="syntax-row">
+                      <code>✅ https://upload.wikimedia.org/.../foto.jpg</code>
+                      <span class="ok">URL file langsung</span>
+                    </div>
+                    <div class="syntax-row">
+                      <code>❌ https://id.wikipedia.org/wiki/File:...</code>
+                      <span class="no">URL halaman Wikipedia</span>
+                    </div>
+                    <div class="syntax-row">
+                      <code>❌ https://drive.google.com/file/d/...</code>
+                      <span class="no">URL halaman Drive</span>
+                    </div>
+                  </div>
+
+                  <div class="syntax-section">
+                    <div class="mono-tag">🎬 VIDEO</div>
+                    <div class="syntax-row">
+                      <code>✅ https://www.youtube.com/embed/VIDEO_ID</code>
+                      <span class="ok">Format embed</span>
+                    </div>
+                    <div class="syntax-row">
+                      <code>✅ https://youtu.be/VIDEO_ID</code>
+                      <span class="ok">Auto-converted ke embed</span>
+                    </div>
+                    <div class="syntax-row">
+                      <code>❌ https://www.youtube.com/watch?v=...</code>
+                      <span class="warn">Auto-converted, tapi lebih baik pakai embed</span>
+                    </div>
+                  </div>
+                </div>
+              </q-expansion-item>
+
+
+
+              <q-card flat bordered class="editor-card q-mt-md">
+                <div class="mono-tag q-mb-md">MATERI (SECTIONS)</div>
+                <!-- ✅ SESUDAH -->
+                <SectionListEditor :sections="activeModule.sections || []" @add="addSection" @update="updateSection"
+                  @delete="deleteSection" @move-up="(i) => moveSection(i, -1)" @move-down="(i) => moveSection(i, 1)"
+                  @reorder="({ from, to }) => reorderSection({ from, to })" />
+              </q-card>
+
+              <q-card flat bordered class="editor-card q-mt-md">
+                <QuestionListEditor title="FREE TEST" :questions="activeModule.freeTest?.questions || []"
+                  @add="addFreeQuestion" @update="(i, payload) => updateQuestion('freeTest', i, payload)"
+                  @delete="(i) => deleteQuestion('freeTest', i)" @move-up="(i) => moveQuestion('freeTest', i, -1)"
+                  @move-down="(i) => moveQuestion('freeTest', i, 1)"
+                  @reorder="({ from, to }) => reorderQuestion('freeTest', from, to)" />
+              </q-card>
+
+              <q-card flat bordered class="editor-card q-mt-md">
+                <QuestionListEditor title="POST TEST" :questions="activeModule.postTest?.questions || []"
+                  :passing-score="activeModule.postTest?.passingScore ?? activeModule.passingScore"
+                  @add="addPostQuestion" @update="(i, payload) => updateQuestion('postTest', i, payload)"
+                  @delete="(i) => deleteQuestion('postTest', i)" @move-up="(i) => moveQuestion('postTest', i, -1)"
+                  @move-down="(i) => moveQuestion('postTest', i, 1)"
+                  @reorder="({ from, to }) => reorderQuestion('postTest', from, to)" />
+              </q-card>
+
+              <div class="editor-actions q-mt-lg">
+                <q-btn class="btn-primary-tech" unelevated icon="download" label="Export JSON" @click="downloadJson" />
+                <q-btn class="btn-ghost-tech" outline icon="refresh" label="Reset ke Konten Asli"
+                  @click="confirmResetWorking" />
+              </div>
+            </div>
+          </div>
+        </q-tab-panel>
+
+        <!-- ═══════════════ TAB: PREVIEW ═══════════════ -->
+        <q-tab-panel name="preview">
+          <div v-if="!activeModule" class="empty-state">
+            <q-icon name="visibility_off" size="40px" color="grey-5" />
+            <p>Pilih modul di Form Editor terlebih dahulu untuk melihat preview.</p>
+            <q-btn class="btn-primary-tech" unelevated icon="edit_note" label="Ke Form Editor" @click="tab = 'form'" />
+          </div>
+          <LivePreview v-else :active-module="activeModule" />
+        </q-tab-panel>
+
+        <!-- ═══════════════ TAB: MEDIA MANAGER ═══════════════ -->
+        <q-tab-panel name="media">
+          <MediaManager :content="workingContent" :modules="workingContent.modules" @delete-media="handleDeleteMedia" />
+        </q-tab-panel>
+
+        <!-- ═══════════════ TAB: FINAL TEST ═══════════════ -->
+        <q-tab-panel name="final">
+          <FinalTestEditor :final-test="effectiveFinalTest" :modules="workingContent.modules"
+            :expected-count="LEARNING_CONFIG.finalQuestionCount" @update-meta="updateFinalTestMeta"
+            @add-question="addFinalQuestion" @update-question="updateFinalQuestion"
+            @delete-question="deleteFinalQuestion" @move-question="moveFinalQuestion"
+            @reorder-question="reorderFinalQuestion" />
+        </q-tab-panel>
+
+        <!-- ═══════════════ TAB: PASTE TEXT ═══════════════ -->
+        <q-tab-panel name="paste">
+          <q-input v-model="pastedText" type="textarea" outlined autogrow label="Tempelkan teks materi + soal"
+            :input-style="{
+              minHeight: '280px',
+              fontFamily: 'IBM Plex Mono, monospace',
+              fontSize: '0.85rem',
+            }" />
+          <q-expansion-item class="format-hint q-mt-md" icon="help_outline" label="Lihat format yang diharapkan">
+            <pre class="format-pre">MODULE_ID: module-06
+JUDUL: Judul Modul Baru
+DESKRIPSI: Deskripsi singkat
+KKM: 80
+
+TUJUAN:
+Memahami konsep X.
+Mengidentifikasi Y.
+
+SECTION: lesson-06-01
+JUDUL_SECTION: A. Judul Subbab
+KONTEN:
+Paragraf pertama...
+Paragraf kedua...
+POIN:
+Poin penting pertama.
+Poin penting kedua.
+KATA_KUNCI:
+kata1, kata2, kata3
+
+SOAL_FREE: q-ft-06-01
+PERTANYAAN: Teks pertanyaan free test?
+A. Pilihan A
+B. Pilihan B
+C. Pilihan C
+D. Pilihan D
+JAWABAN: B
+PEMBAHASAN: Alasan jawaban benar.
+
+SOAL_POST: q-pt-06-01
+PERTANYAAN: Teks pertanyaan post test?
+A. Pilihan A
+B. Pilihan B
+C. Pilihan C
+D. Pilihan D
+JAWABAN: A
+PEMBAHASAN: Alasan jawaban benar.</pre>
+          </q-expansion-item>
+          <div class="editor-actions q-mt-md">
+            <q-btn class="btn-primary-tech" unelevated icon="play_arrow" label="Parse Teks" @click="parsePasted" />
+            <q-btn class="btn-ghost-tech" outline icon="auto_fix_high" label="Muat Contoh" @click="loadSample" />
+            <q-btn class="btn-ghost-tech" outline icon="clear" label="Bersihkan" @click="pastedText = ''" />
+          </div>
+        </q-tab-panel>
+
+        <!-- ═══════════════ TAB: JSON PREVIEW ═══════════════ -->
+        <q-tab-panel name="json">
+          <div class="json-head">
+            <span class="mono-tag">
+              JSON akan digunakan sebagai materi.json
+            </span>
+            <q-btn dense flat size="sm" icon="content_copy" label="Copy" @click="copyJson" />
+          </div>
+          <q-input :model-value="jsonOutput" type="textarea" outlined autogrow readonly :input-style="{
+            minHeight: '420px',
+            fontFamily: 'IBM Plex Mono, monospace',
+            fontSize: '0.72rem',
+          }" />
+          <div class="editor-actions q-mt-md">
+            <q-btn class="btn-primary-tech" unelevated icon="download" label="Download JSON" @click="downloadJson" />
+            <q-btn class="btn-ghost-tech" outline icon="upload_file" label="Import JSON" @click="triggerImport" />
+            <input ref="fileInputRef" type="file" accept="application/json" style="display: none"
+              @change="handleImportFile" />
+          </div>
+        </q-tab-panel>
+
+        <!-- ═══════════════ TAB: VALIDASI ═══════════════ -->
+        <q-tab-panel name="validate">
+          <div class="validate-actions">
+            <q-btn class="btn-primary-tech" unelevated icon="check_circle" label="Validasi Sekarang"
+              @click="runValidation" />
+          </div>
+          <div v-if="validation.length === 0" class="validate-empty">
+            Klik "Validasi Sekarang" untuk memeriksa konten.
+          </div>
+          <div v-else class="validate-list">
+            <div v-for="(v, i) in validation" :key="i" class="validate-row" :class="`validate-row--${v.level}`">
+              <q-icon :name="iconFor(v.level)" size="16px" />
+              <span>{{ v.message }}</span>
+            </div>
+          </div>
+        </q-tab-panel>
+
+      </q-tab-panels>
+    </div>
+  </q-page>
+</template>
+
+<script setup>
+import { ref, reactive, computed, onMounted, provide } from 'vue'
+import { useQuasar } from 'quasar'
+// import contentRepo from '../repositories/contentRepository'
+import { validateContent } from '../repositories/contentValidator'
+import LEARNING_CONFIG from '../config/learning.js'
+
+import ModuleListSidebar from '../components/builder/ModuleListSidebar.vue'
+import ModuleMetaForm from '../components/builder/ModuleMetaForm.vue'
+import SectionListEditor from '../components/builder/SectionListEditor.vue'
+import QuestionListEditor from '../components/builder/QuestionListEditor.vue'
+import FinalTestEditor from '../components/builder/FinalTestEditor.vue'
+import LivePreview from '../components/builder/LivePreview.vue'
+import MediaManager from '../components/builder/MediaManager.vue'   // ══ BARU ══
+import { removeMediaFromContent } from '../composables/useMediaLibrary'   // ══ BARU ══
+import { useAuth } from '../composables/useAuth'
+const { logout } = useAuth()
+
+
+const $q = useQuasar()
+
+// ─────────────────────────── State ───────────────────────────
+const tab = ref('form')
+const activeModuleIndex = ref(0)
+
+const workingContent = reactive({
+  contentVersion: '2.1.0',
+  updatedAt: new Date().toISOString().slice(0, 10),
+  modules: [],
+  finalTest: null,
+})
+provide('builderContent', workingContent)
+const pastedText = ref('')
+const validation = ref([])
+const fileInputRef = ref(null)
+
+// ─────────────────────────── Computed ───────────────────────────
+const activeModule = computed(() => workingContent.modules[activeModuleIndex.value] || null)
+// ══════ FINAL TEST: effective (auto-create struktur default jika null) ══════
+const effectiveFinalTest = computed(() => {
+  if (workingContent.finalTest) return workingContent.finalTest
+  // Belum ada — kembalikan objek default (hanya untuk render; tidak dimutasi)
+  return {
+    id: 'final-test',
+    judul: 'Final Test — Evaluasi Akhir',
+    passingScore: LEARNING_CONFIG.passingScore,
+    questions: [],
+  }
+})
+
+function ensureFinalTest() {
+  if (!workingContent.finalTest) {
+    workingContent.finalTest = {
+      id: 'final-test',
+      judul: 'Final Test — Evaluasi Akhir',
+      passingScore: LEARNING_CONFIG.passingScore,
+      questions: [],
+    }
+  }
+  return workingContent.finalTest
+}
+// const jsonOutput = computed(() => JSON.stringify(workingContent, null, 2))
+
+// ─────────────────────────── Lifecycle ───────────────────────────
+onMounted(() => loadFromRepository())
+
+function loadFromRepository() {
+  import('../assets/materi.json').then((mod) => {
+    const raw = mod.default || {}
+
+    // Dukung skema baru (object dengan .modules) dan skema lama (array)
+    const modules = Array.isArray(raw) ? raw : raw.modules || []
+    const finalTest = Array.isArray(raw) ? null : raw.finalTest || null
+
+    const source = {
+      contentVersion: raw.contentVersion || '2.1.0',
+      updatedAt: raw.updatedAt || new Date().toISOString().slice(0, 10),
+      modules: JSON.parse(JSON.stringify(modules)),
+      finalTest: finalTest ? JSON.parse(JSON.stringify(finalTest)) : null,
+    }
+
+    applyContent(source)
+  })
+}
+
+function applyContent(content) {
+  workingContent.contentVersion = content.contentVersion || '2.1.0'
+  workingContent.updatedAt = content.updatedAt || new Date().toISOString().slice(0, 10)
+  workingContent.modules.splice(0, workingContent.modules.length, ...(content.modules || []))
+  workingContent.finalTest = content.finalTest || null
+  activeModuleIndex.value = 0
+}
+
+// ─────────────────────────── Module CRUD ───────────────────────────
+// ✅ SESUDAH — cari ID numerik tertinggi dulu
+function addModule() {
+  // Cari angka terbesar dari ID yang ada (mis. "module-07" → 7)
+  const existingNums = workingContent.modules
+    .map((m) => {
+      const match = /^module-(\d+)$/.exec(m.id || '')
+      return match ? parseInt(match[1], 10) : 0
+    })
+  const nextNum = Math.max(0, ...existingNums) + 1
+  const padded = String(nextNum).padStart(2, '0')
+
+  const newModule = {
+    id: `module-${padded}`,
+    urutan: workingContent.modules.length + 1, // posisi di akhir
+    judul: `Modul ${nextNum} Baru`,
+    judulShort: `Modul ${nextNum}`,
+    deskripsi: '',
+    tujuanPembelajaran: [],
+    passingScore: LEARNING_CONFIG.passingScore,
+    sections: [],
+    freeTest: { id: `free-${padded}`, questions: [] },
+    postTest: {
+      id: `post-${padded}`,
+      passingScore: LEARNING_CONFIG.passingScore,
+      questions: [],
+    },
+    finalQuestionIds: [],
+  }
+  workingContent.modules.push(newModule)
+  activeModuleIndex.value = workingContent.modules.length - 1
+}
+
+function deleteModule(index) {
+  const mod = workingContent.modules[index]
+  $q.dialog({
+    title: 'Hapus Modul',
+    message: `Yakin menghapus "${mod.judul}"? Tindakan ini tidak dapat dibatalkan.`,
+    cancel: { label: 'Batal', flat: true },
+    ok: { label: 'Hapus', color: 'negative', unelevated: true },
+    persistent: true,
+  }).onOk(() => {
+    workingContent.modules.splice(index, 1)
+    activeModuleIndex.value = Math.max(0, Math.min(activeModuleIndex.value, workingContent.modules.length - 1))
+  })
+}
+
+// ══════ Reorder modul via drag-drop ══════
+function reorderModule({ from, to }) {
+  if (from === to || from == null || to == null) return
+  const arr = workingContent.modules
+  const [moved] = arr.splice(from, 1)
+  arr.splice(to, 0, moved)
+
+  // ══════ Auto-renumber `urutan` agar konsisten dengan urutan visual ══════
+  // ID modul TETAP (module-01, module-02, dst) — hanya `urutan` yang berubah.
+  // Ini penting karena ID direferensikan oleh:
+  //   - finalQuestionIds[] di setiap modul
+  //   - moduleId pada soal Final Test
+  //   - progress keys di localStorage (ppkn-progress-v2)
+  arr.forEach((mod, i) => {
+    mod.urutan = i + 1
+  })
+
+  // Jaga agar modul yang aktif tetap sama (bukan pindah ke indeks baru)
+  const movedId = moved.id
+  const newIndex = arr.findIndex((m) => m.id === movedId)
+  if (newIndex >= 0) activeModuleIndex.value = newIndex
+}
+
+// ══════ Media Manager — Delete Cascade ══════
+function handleDeleteMedia({ src, usages }) {
+  const { removed } = removeMediaFromContent(workingContent, src)
+  $q.notify({
+    type: 'positive',
+    message: `Media dihapus dari ${removed} tempat${usages.length !== removed ? ` (referensi: ${usages.length})` : ''}.`,
+    position: 'top',
+  })
+}
+
+function updateModule(key, value) {
+  if (!activeModule.value) return
+  activeModule.value[key] = value
+}
+
+// ─────────────────────────── Section CRUD ───────────────────────────
+function addSection() {
+  if (!activeModule.value) return
+  const mod = activeModule.value
+  const seq = (mod.sections?.length || 0) + 1
+  const modNum = String(mod.urutan).padStart(2, '0')
+  mod.sections = mod.sections || []
+  mod.sections.push({
+    id: `lesson-${modNum}-${String(seq).padStart(2, '0')}`,
+    judul: `Section ${seq} Baru`,
+    konten: [''],
+    poinPenting: [],
+    kataKunci: [],
+  })
+}
+
+function updateSection(index, payload) {
+  if (!activeModule.value?.sections) return
+  const sec = activeModule.value.sections[index]
+  if (!sec) return
+  if (payload.key) {
+    sec[payload.key] = payload.value
+  } else {
+    // bulk update (misal dari updateOption)
+    Object.assign(sec, payload)
+  }
+}
+
+function deleteSection(index) {
+  if (!activeModule.value?.sections) return
+  $q.dialog({
+    title: 'Hapus Section',
+    message: 'Yakin menghapus section ini?',
+    cancel: { label: 'Batal', flat: true },
+    ok: { label: 'Hapus', color: 'negative', unelevated: true },
+  }).onOk(() => {
+    activeModule.value.sections.splice(index, 1)
+  })
+}
+
+function moveSection(index, direction) {
+  const arr = activeModule.value?.sections
+  if (!arr) return
+  const j = index + direction
+  if (j < 0 || j >= arr.length) return
+    ;[arr[index], arr[j]] = [arr[j], arr[index]]
+}
+
+// ─────────────────────────── Question CRUD ───────────────────────────
+function addFreeQuestion() {
+  addQuestion('freeTest', 'ft')
+}
+function addPostQuestion() {
+  addQuestion('postTest', 'pt')
+}
+
+function addQuestion(testKey, prefix) {
+  const mod = activeModule.value
+  if (!mod) return
+  const modNum = String(mod.urutan).padStart(2, '0')
+  if (!mod[testKey]) mod[testKey] = { questions: [] }
+  if (!Array.isArray(mod[testKey].questions)) mod[testKey].questions = []
+  const seq = mod[testKey].questions.length + 1
+  mod[testKey].questions.push({
+    id: `q-${prefix}-${modNum}-${String(seq).padStart(2, '0')}`,
+    pertanyaan: '',
+    options: [
+      { id: 'A', text: '' },
+      { id: 'B', text: '' },
+      { id: 'C', text: '' },
+      { id: 'D', text: '' },
+    ],
+    correctOptionId: 'A',
+    pembahasan: '',
+    moduleId: mod.id,
+    concept: '',
+    difficulty: 'medium',
+  })
+}
+
+function updateQuestion(testKey, index, payload) {
+  const mod = activeModule.value
+  if (!mod?.[testKey]?.questions) return
+  const q = mod[testKey].questions[index]
+  if (!q) return
+  if (payload.key) {
+    q[payload.key] = payload.value
+  } else {
+    Object.assign(q, payload)
+  }
+}
+
+function deleteQuestion(testKey, index) {
+  const mod = activeModule.value
+  if (!mod?.[testKey]?.questions) return
+  $q.dialog({
+    title: 'Hapus Soal',
+    message: 'Yakin menghapus soal ini?',
+    cancel: { label: 'Batal', flat: true },
+    ok: { label: 'Hapus', color: 'negative', unelevated: true },
+  }).onOk(() => {
+    mod[testKey].questions.splice(index, 1)
+  })
+}
+
+function moveQuestion(testKey, index, direction) {
+  const arr = activeModule.value?.[testKey]?.questions
+  if (!arr) return
+  const j = index + direction
+  if (j < 0 || j >= arr.length) return
+    ;[arr[index], arr[j]] = [arr[j], arr[index]]
+}
+
+// ══════ Reorder Free/Post Test ══════
+function reorderQuestion(testKey, from, to) {
+  const arr = activeModule.value?.[testKey]?.questions
+  if (!arr) return
+  if (from === to || from == null || to == null) return
+  const [moved] = arr.splice(from, 1)
+  arr.splice(to, 0, moved)
+}
+
+// ══════ Reorder Final Test ══════
+function reorderFinalQuestion({ from, to }) {
+  const ft = ensureFinalTest()
+  if (from === to || from == null || to == null) return
+  const [moved] = ft.questions.splice(from, 1)
+  ft.questions.splice(to, 0, moved)
+}
+
+// ─────────────────────────── Final Test CRUD ───────────────────────────
+function updateFinalTestMeta({ key, value }) {
+  ensureFinalTest()
+  workingContent.finalTest[key] = value
+}
+
+function addFinalQuestion() {
+  const ft = ensureFinalTest()
+  const seq = ft.questions.length + 1
+  // Default modul = modul pertama (jika ada)
+  const defaultModuleId = workingContent.modules[0]?.id || ''
+  ft.questions.push({
+    id: `q-f-${String(seq).padStart(3, '0')}`,
+    moduleId: defaultModuleId,
+    concept: '',
+    difficulty: 'medium',
+    pertanyaan: '',
+    options: [
+      { id: 'A', text: '' },
+      { id: 'B', text: '' },
+      { id: 'C', text: '' },
+      { id: 'D', text: '' },
+    ],
+    correctOptionId: 'A',
+    pembahasan: '',
+  })
+}
+
+function updateFinalQuestion(index, payload) {
+  const ft = ensureFinalTest()
+  const q = ft.questions[index]
+  if (!q) return
+  if (payload.key) {
+    q[payload.key] = payload.value
+  } else {
+    Object.assign(q, payload)
+  }
+}
+
+function deleteFinalQuestion(index) {
+  const ft = ensureFinalTest()
+  $q.dialog({
+    title: 'Hapus Soal Final',
+    message: 'Yakin menghapus soal final ini?',
+    cancel: { label: 'Batal', flat: true },
+    ok: { label: 'Hapus', color: 'negative', unelevated: true },
+  }).onOk(() => {
+    ft.questions.splice(index, 1)
+  })
+}
+
+function moveFinalQuestion(index, direction) {
+  const ft = ensureFinalTest()
+  const arr = ft.questions
+  const j = index + direction
+  if (j < 0 || j >= arr.length) return
+    ;[arr[index], arr[j]] = [arr[j], arr[index]]
+}
+
+// ─────────────────────────── Paste Text (Mode A) ───────────────────────────
+function loadSample() {
+  pastedText.value = `MODULE_ID: module-06
+JUDUL: Contoh Modul Baru
+DESKRIPSI: Modul contoh hasil Content Builder.
+KKM: 80
+
+TUJUAN:
+Memahami konsep dasar modul ini.
+Mengidentifikasi contoh penerapan.
+
+SECTION: lesson-06-01
+JUDUL_SECTION: A. Subbab Pertama
+KONTEN:
+Ini paragraf pertama materi.
+Ini paragraf kedua materi.
+POIN:
+Poin penting pertama.
+Poin penting kedua.
+KATA_KUNCI:
+kata1, kata2, kata3
+
+SOAL_FREE: q-ft-06-01
+PERTANYAAN: Contoh pertanyaan free test?
+A. Pilihan pertama
+B. Pilihan kedua
+C. Pilihan ketiga
+D. Pilihan keempat
+JAWABAN: B
+PEMBAHASAN: Karena B adalah jawaban yang tepat.
+
+SOAL_POST: q-pt-06-01
+PERTANYAAN: Contoh pertanyaan post test?
+A. Pilihan pertama
+B. Pilihan kedua
+C. Pilihan ketiga
+D. Pilihan keempat
+JAWABAN: A
+PEMBAHASAN: Karena A adalah jawaban yang tepat.`
+}
+
+function parsePasted() {
+  validation.value = []
+  try {
+    const mod = parseModuleText(pastedText.value)
+    if (!mod) throw new Error('Tidak ada MODULE_ID yang terdeteksi.')
+
+    // Tambahkan ke modul yang ada (bukan mengganti)
+    workingContent.modules.push(mod)
+    activeModuleIndex.value = workingContent.modules.length - 1
+
+    // Auto-validasi
+    try {
+      validateContent({
+        contentVersion: workingContent.contentVersion,
+        modules: workingContent.modules,
+        finalTest: workingContent.finalTest,
+      })
+      $q.notify({ type: 'positive', message: `Modul "${mod.judul}" berhasil ditambahkan.`, position: 'top' })
+    } catch (err) {
+      validation.value.push({ level: 'error', message: err.message })
+      $q.notify({ type: 'warning', message: 'Modul ditambahkan, tetapi ada masalah validasi.', position: 'top' })
+    }
+
+    tab.value = 'form'
+    pastedText.value = ''
+  } catch (err) {
+    validation.value = [{ level: 'error', message: err.message }]
+    tab.value = 'validate'
+  }
+}
+
+function parseModuleText(text) {
+  const lines = text.split('\n')
+  const mod = {
+    id: null,
+    urutan: null,
+    judul: null,
+    judulShort: '',
+    deskripsi: '',
+    tujuanPembelajaran: [],
+    passingScore: LEARNING_CONFIG.passingScore,
+    sections: [],
+    freeTest: { id: '', questions: [] },
+    postTest: { id: '', passingScore: LEARNING_CONFIG.passingScore, questions: [] },
+    finalQuestionIds: [],
+  }
+  let currentSection = null
+  let currentQuestion = null
+  let currentTarget = null // 'konten' | 'poin' | 'kataKunci' | 'tujuan' | 'pembahasan'
+  let buffer = []
+
+  const flushBuffer = () => {
+    if (!buffer.length) return
+    const joined = buffer.join('\n').trim()
+    buffer = []
+    if (!joined) return
+    if (currentTarget === 'konten' && currentSection) currentSection.konten.push(joined)
+    else if (currentTarget === 'poin' && currentSection) {
+      joined.split('\n').forEach((l) => l.trim() && currentSection.poinPenting.push(l.trim()))
+    } else if (currentTarget === 'kataKunci' && currentSection) {
+      joined.split(',').map((s) => s.trim()).filter(Boolean).forEach((k) => currentSection.kataKunci.push(k))
+    } else if (currentTarget === 'tujuan') {
+      joined.split('\n').forEach((l) => l.trim() && mod.tujuanPembelajaran.push(l.trim()))
+    } else if (currentTarget === 'pembahasan' && currentQuestion) {
+      currentQuestion.pembahasan = joined
+    }
+  }
+
+  const flushSection = () => {
+    flushBuffer()
+    if (currentSection) {
+      mod.sections.push(currentSection)
+      currentSection = null
+    }
+  }
+
+  const flushQuestion = () => {
+    flushBuffer()
+    if (currentQuestion) {
+      if (currentQuestion._target === 'free') mod.freeTest.questions.push(currentQuestion.q)
+      else mod.postTest.questions.push(currentQuestion.q)
+      currentQuestion = null
+    }
+  }
+
+  for (const raw of lines) {
+    const line = raw.trim()
+    const m = /^([A-Z_]+):\s*(.*)$/.exec(line)
+    if (m) {
+      const [, key, val] = m
+      switch (key) {
+        case 'MODULE_ID':
+          flushQuestion(); flushSection()
+          mod.id = val
+          mod.urutan = parseInt(val.replace(/\D/g, ''), 10) || 99
+          mod.judulShort = `Modul ${mod.urutan}`
+          mod.freeTest.id = `free-${String(mod.urutan).padStart(2, '0')}`
+          mod.postTest.id = `post-${String(mod.urutan).padStart(2, '0')}`
+          break
+        case 'JUDUL':
+          if (!currentSection && !currentQuestion) mod.judul = val
+          break
+        case 'DESKRIPSI':
+          mod.deskripsi = val
+          break
+        case 'KKM':
+          mod.passingScore = Number(val) || 80
+          mod.postTest.passingScore = mod.passingScore
+          break
+        case 'TUJUAN':
+          flushQuestion(); flushSection()
+          currentTarget = 'tujuan'
+          break
+        case 'SECTION':
+          flushQuestion(); flushSection()
+          currentSection = { id: val, judul: '', konten: [], poinPenting: [], kataKunci: [] }
+          break
+        case 'JUDUL_SECTION':
+          if (currentSection) currentSection.judul = val
+          break
+        case 'KONTEN':
+          currentTarget = 'konten'
+          break
+        case 'POIN':
+          currentTarget = 'poin'
+          break
+        case 'KATA_KUNCI':
+          currentTarget = 'kataKunci'
+          break
+        case 'SOAL_FREE':
+          flushQuestion(); flushSection()
+          currentQuestion = {
+            _target: 'free',
+            q: {
+              id: val, pertanyaan: '', options: [], correctOptionId: '', pembahasan: '',
+              moduleId: mod.id, concept: '', difficulty: 'medium',
+            },
+          }
+          break
+        case 'SOAL_POST':
+          flushQuestion(); flushSection()
+          currentQuestion = {
+            _target: 'post',
+            q: {
+              id: val, pertanyaan: '', options: [], correctOptionId: '', pembahasan: '',
+              moduleId: mod.id, concept: '', difficulty: 'medium',
+            },
+          }
+          break
+        case 'PERTANYAAN':
+          if (currentQuestion) currentQuestion.q.pertanyaan = val
+          break
+        case 'JAWABAN':
+          if (currentQuestion) currentQuestion.q.correctOptionId = val
+          break
+        case 'PEMBAHASAN':
+          currentTarget = 'pembahasan'
+          break
+        default:
+          if (/^[A-F]$/.test(key) && currentQuestion) {
+            currentQuestion.q.options.push({ id: key, text: val })
+          }
+      }
+      continue
+    }
+
+    // Baris biasa
+    if (currentQuestion && /^[A-F]\.\s+/.test(line)) {
+      const optId = line[0]
+      const optText = line.slice(2).trim()
+      currentQuestion.q.options.push({ id: optId, text: optText })
+      continue
+    }
+    if (line) buffer.push(line)
+  }
+
+  flushQuestion()
+  flushSection()
+
+  if (!mod.id) throw new Error('MODULE_ID wajib diisi.')
+  if (!mod.judul) throw new Error('JUDUL wajib diisi.')
+  if (!mod.sections.length) throw new Error('Minimal 1 section harus ada.')
+
+  return mod
+}
+
+// ─────────────────────────── JSON Export/Import ───────────────────────────
+function downloadJson() {
+  // jsonOutput sudah bersih (via computed di atas)
+  const blob = new Blob([jsonOutput.value], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'materi.json'
+  a.click()
+  URL.revokeObjectURL(url)
+}
+// Strips internal fields (_id) sebelum export
+function stripInternalFields(content) {
+  const clone = JSON.parse(JSON.stringify(content))
+
+  // Buang key `_id` dari object blok
+  function omitId(obj) {
+    if (typeof obj !== 'object' || obj === null) return obj
+    return Object.fromEntries(
+      Object.entries(obj).filter(([key]) => key !== '_id')
+    )
+  }
+
+  function cleanBlocks(arr) {
+    if (!Array.isArray(arr)) return arr
+    return arr.map(omitId)
+  }
+
+  if (Array.isArray(clone.modules)) {
+    for (const mod of clone.modules) {
+      if (Array.isArray(mod.sections)) {
+        for (const sec of mod.sections) {
+          if (Array.isArray(sec.konten)) {
+            sec.konten = cleanBlocks(sec.konten)
+          }
+        }
+      }
+    }
+  }
+  return clone
+}
+
+// Ganti jsonOutput computed
+const jsonOutput = computed(() => {
+  const clean = stripInternalFields(workingContent)
+  return JSON.stringify(clean, null, 2)
+})
+
+async function copyJson() {
+  try {
+    await navigator.clipboard.writeText(jsonOutput.value)
+    $q.notify({ type: 'positive', message: 'JSON tercopy ke clipboard.' })
+  } catch {
+    $q.notify({ type: 'negative', message: 'Gagal copy. Salin manual dari kotak teks.' })
+  }
+}
+
+function triggerImport() {
+  fileInputRef.value?.click()
+}
+
+function handleImportFile(event) {
+  const file = event.target.files?.[0]
+  if (!file) return
+  const reader = new FileReader()
+  reader.onload = (e) => {
+    try {
+      const parsed = JSON.parse(e.target.result)
+      applyContent(parsed)
+      $q.notify({ type: 'positive', message: 'JSON berhasil diimpor.', position: 'top' })
+      tab.value = 'form'
+    } catch (err) {
+      $q.notify({ type: 'negative', message: `Import gagal: ${err.message}`, position: 'top' })
+    }
+  }
+  reader.readAsText(file)
+  event.target.value = ''
+}
+
+// ─────────────────────────── Validation ───────────────────────────
+function runValidation() {
+  validation.value = []
+  try {
+    validateContent({
+      contentVersion: workingContent.contentVersion,
+      modules: workingContent.modules,
+      finalTest: workingContent.finalTest,
+    })
+    validation.value.push({ level: 'info', message: 'Konten valid. Tidak ada masalah ditemukan.' })
+  } catch (err) {
+    validation.value.push({ level: 'error', message: err.message })
+  }
+}
+
+function iconFor(level) {
+  return { info: 'check_circle', error: 'cancel', warning: 'warning' }[level] || 'info'
+}
+// ══════ Reorder via drag-drop ══════
+function reorderSection({ from, to }) {
+  const arr = activeModule.value?.sections
+  if (!arr) return
+  const [moved] = arr.splice(from, 1)
+  arr.splice(to, 0, moved)
+}
+// ─────────────────────────── Reset ───────────────────────────
+function confirmResetWorking() {
+  $q.dialog({
+    title: 'Reset ke Konten Asli',
+    message: 'Semua perubahan yang belum di-export akan hilang. Yakin?',
+    cancel: { label: 'Batal', flat: true },
+    ok: { label: 'Reset', color: 'negative', unelevated: true },
+  }).onOk(() => {
+    loadFromRepository()
+    $q.notify({ type: 'info', message: 'Konten direset ke versi asli.', position: 'top' })
+  })
+}
+
+function confirmLogout() {
+  $q.dialog({
+    title: 'Logout',
+    message: 'Keluar dari content builder?',
+    cancel: { label: 'Batal', flat: true },
+    ok: { label: 'Logout', color: 'negative', unelevated: true },
+  }).onOk(() => {
+    logout()
+    window.location.replace('/')
+  })
+}
+
+</script>
+
+<style scoped>
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.builder-page {
+  background: var(--paper, #F4F6F8);
+  min-height: 100vh;
+}
+
+.builder-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+}
+
+.builder-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.mono-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ink-500, #5B6B7C);
+}
+
+.builder-version {
+  opacity: 0.7;
+}
+
+.builder-title {
+  font-size: 1.6rem;
+  margin: 0 0 6px;
+  color: var(--navy-900, #0B1F33);
+}
+
+.builder-subtitle {
+  color: var(--ink-500, #5B6B7C);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.builder-tabs {
+  background: #fff;
+  border: 1px solid var(--border, #D8DEE5);
+  border-radius: 6px;
+}
+
+/* Form editor layout */
+.form-editor {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.editor-sidebar {
+  position: sticky;
+  top: 16px;
+}
+
+.editor-panel {
+  min-width: 0;
+}
+
+.editor-card {
+  padding: 16px;
+}
+
+.editor-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Empty state */
+.empty-state {
+  padding: 60px 20px;
+  text-align: center;
+  background: #fff;
+  border: 1px dashed var(--border, #D8DEE5);
+  border-radius: 8px;
+}
+
+.empty-state p {
+  color: var(--ink-500, #5B6B7C);
+  margin: 12px 0;
+}
+
+/* JSON preview */
+.json-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Format hint */
+.format-hint {
+  background: #fff;
+  border: 1px solid var(--border, #D8DEE5);
+  border-radius: 6px;
+}
+
+.format-pre {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  white-space: pre-wrap;
+  line-height: 1.6;
+  padding: 12px 16px;
+  margin: 0;
+  color: var(--ink-900, #1B2733);
+}
+
+/* Validation */
+.validate-actions {
+  margin-bottom: 14px;
+}
+
+.validate-empty {
+  padding: 24px;
+  text-align: center;
+  color: var(--ink-500, #5B6B7C);
+  background: #fff;
+  border: 1px dashed var(--border, #D8DEE5);
+  border-radius: 6px;
+}
+
+.validate-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  font-size: 0.85rem;
+}
+
+.validate-row--info {
+  background: #E8F7EE;
+  color: #15663A;
+}
+
+.validate-row--error {
+  background: var(--red-100, #F1DCDB);
+  color: var(--red-500, #A6403F);
+}
+
+.validate-row--warning {
+  background: #FFF4D6;
+  color: #8A6A14;
+}
+
+/* Buttons */
+.btn-primary-tech {
+  background: var(--gold-500, #C9A227);
+  color: var(--navy-900, #0B1F33);
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.btn-ghost-tech {
+  color: var(--navy-700, #16324F);
+  border: 1px solid var(--border, #D8DEE5);
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .form-editor {
+    grid-template-columns: 1fr;
+  }
+
+  .editor-sidebar {
+    position: static;
+  }
+}
+
+.syntax-help {
+  background: #fff;
+  border: 1px solid var(--border, #D8DEE5);
+  border-radius: 6px;
+}
+
+.syntax-content {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.syntax-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 14px;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.syntax-row code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.78rem;
+  background: var(--paper, #F4F6F8);
+  padding: 2px 8px;
+  border-radius: 3px;
+  color: var(--red-500, #A6403F);
+  border: 1px solid var(--border, #D8DEE5);
+}
+
+.syntax-section {
+  margin-bottom: 14px;
+}
+
+.syntax-section:last-child {
+  margin-bottom: 0;
+}
+
+.syntax-row .ok {
+  color: #15663A;
+  font-weight: 600;
+}
+
+.syntax-row .no {
+  color: #A6403F;
+  font-weight: 600;
+}
+
+.syntax-row .warn {
+  color: #8A6A14;
+  font-weight: 600;
+}
+</style>

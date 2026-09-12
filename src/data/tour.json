@@ -1,0 +1,63 @@
+{
+  "tourVersion": 2,
+  "steps": [
+    {
+      "id": "welcome",
+      "title": "Selamat Datang di Ruang Belajar Digital! 👋",
+      "description": "Platform ini berisi materi dari berbagai mata pelajaran — Pendidikan Pancasila, Ilmu Hukum, dan Komputer Jaringan. Mari kita lihat sekilas apa saja yang tersedia di sini.",
+      "target": null,
+      "placement": "center"
+    },
+    {
+      "id": "hero",
+      "title": "Ruang Belajar Anda",
+      "description": "Di sini Anda dapat menjelajahi berbagai mata pelajaran dalam satu tempat. Belajar mandiri, kapan saja, di mana saja — bahkan tanpa internet.",
+      "target": "[data-tour='landing-hero']",
+      "placement": "bottom"
+    },
+    {
+      "id": "stats",
+      "title": "Katalog Konten",
+      "description": "Panel ini menunjukkan jumlah mata pelajaran, total modul, dan soal final yang tersedia di platform. Semua gratis, tanpa iklan.",
+      "target": "[data-tour='landing-stats']",
+      "placement": "left"
+    },
+    {
+      "id": "continue",
+      "title": "Lanjutkan Belajar",
+      "description": "Jika Anda sudah pernah belajar, kartu ini akan muncul otomatis untuk membantu Anda melanjutkan dari modul terakhir yang Anda kerjakan.",
+      "target": "[data-tour='landing-continue']",
+      "placement": "bottom",
+      "optional": true
+    },
+    {
+      "id": "subjects",
+      "title": "Pilih Mata Pelajaran",
+      "description": "Setiap mata pelajaran memiliki modul berjenjang dengan kuis dan evaluasi akhir. Kartu subject menampilkan jumlah modul, KKM, dan preview isi.",
+      "target": "[data-tour='landing-subjects']",
+      "placement": "top"
+    },
+    {
+      "id": "card-sample",
+      "title": "Kartu Subject",
+      "description": "Klik tombol 'Jelajahi' pada kartu untuk membuka halaman subject. Di sana Anda akan melihat daftar modul yang bisa mulai dipelajari.",
+      "target": "[data-tour='subject-card-first']",
+      "placement": "bottom",
+      "optional": true
+    },
+    {
+      "id": "about",
+      "title": "Tentang Platform",
+      "description": "Pelajari lebih lanjut tentang platform ini, atau lihat daftar pertanyaan umum jika Anda butuh bantuan.",
+      "target": "[data-tour='landing-about']",
+      "placement": "top"
+    },
+    {
+      "id": "finish",
+      "title": "Siap Memulai! 🚀",
+      "description": "Pilih mata pelajaran yang ingin Anda dalami, dan mulai dari modul pertama. Selamat belajar!",
+      "target": null,
+      "placement": "center"
+    }
+  ]
+}
