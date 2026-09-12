@@ -1,17 +1,14 @@
 {
-    "name": "Ruang Belajar Digital",
-    "short_name": "Ruang Belajar",
-    "description": "Platform pembelajaran mandiri multi-mata-pelajaran untuk siswa SMK. Belajar kapan saja, di mana saja, bahkan tanpa internet.",
-    "display": "standalone",
-    "orientation": "portrait-primary",
-    "theme_color": "#0B1F33",
-    "background_color": "#F4F6F8",
-    "lang": "id",
-    "dir": "ltr",
-    "start_url": ".",
-    "scope": ".",
-    "categories": [
-        "education",
-        "books"
-    ]
+  "name": "Ruang Belajar Digital",
+  "short_name": "Ruang Belajar",
+  "description": "Platform pembelajaran mandiri multi-mata-pelajaran untuk siswa SMK.",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0B1F33",
+  "background_color": "#F4F6F8",
+  "lang": "id",
+  "dir": "ltr",
+  "start_url": ".",
+  "scope": ".",
+  "categories": ["education", "books"]
 }
