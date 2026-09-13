@@ -15,43 +15,47 @@
 
         <q-space />
 
-        <q-btn flat dense no-caps icon="home" class="nav-btn" :class="{ 'nav-btn--active': route.path === '/' }"
-          @click="router.push('/')">
-          <span class="nav-label gt-xs q-ml-xs">Beranda</span>
-        </q-btn>
-        <q-btn flat dense no-caps icon="info" class="nav-btn" :class="{ 'nav-btn--active': route.path === '/tentang' }"
-          @click="router.push('/tentang')">
-          <span class="nav-label gt-xs q-ml-xs">Tentang</span>
-        </q-btn>
+        <!-- ═══════════════════════════════════════════════════════
+       NAV BUTTONS — Disembunyikan di halaman materi
+       ═══════════════════════════════════════════════════════ -->
+        <template v-if="!isMateriPage">
+          <q-btn flat dense no-caps icon="home" class="nav-btn" :class="{ 'nav-btn--active': route.path === '/' }"
+            @click="router.push('/')">
+            <span class="nav-label gt-xs q-ml-xs">Beranda</span>
+          </q-btn>
+          <q-btn flat dense no-caps icon="info" class="nav-btn"
+            :class="{ 'nav-btn--active': route.path === '/tentang' }" @click="router.push('/tentang')">
+            <span class="nav-label gt-xs q-ml-xs">Tentang</span>
+          </q-btn>
 
-        <q-btn flat dense no-caps icon="insights" data-tour="nav-analitik" class="nav-btn"
-          :class="{ 'nav-btn--active': route.path == '/analitik' }" @click="router.push('/analitik')">
-          <span class="nav-label gt-xs q-ml-xs">Analitik</span>
-        </q-btn>
+          <q-btn flat dense no-caps icon="insights" data-tour="nav-analitik" class="nav-btn"
+            :class="{ 'nav-btn--active': route.path == '/analitik' }" @click="router.push('/analitik')">
+            <span class="nav-label gt-xs q-ml-xs">Analitik</span>
+          </q-btn>
 
 
-        <!-- <q-btn v-if="isMateriPage" flat dense no-caps icon="menu_book" class="nav-btn" @click="startMateriTour">
+          <!-- <q-btn v-if="isMateriPage" flat dense no-caps icon="menu_book" class="nav-btn" @click="startMateriTour">
           <span class="nav-label gt-xs q-ml-xs">Tour Materi</span>
         </q-btn> -->
 
-        <q-btn v-if="showTourButton" flat dense no-caps :icon="tourButtonIcon" class="nav-btn"
-          :class="{ 'nav-btn--active': isTourActive }" @click="handleTourClick">
-          <span class="nav-label gt-xs q-ml-xs">{{ tourButtonLabel }}</span>
-        </q-btn>
+          <q-btn v-if="showTourButton" flat dense no-caps :icon="tourButtonIcon" class="nav-btn"
+            :class="{ 'nav-btn--active': isTourActive }" @click="handleTourClick">
+            <span class="nav-label gt-xs q-ml-xs">{{ tourButtonLabel }}</span>
+          </q-btn>
 
-        <q-btn flat dense no-caps icon="help_outline" data-tour="nav-faq" class="nav-btn"
-          :class="{ 'nav-btn--active': route.path == '/faq' }" @click="router.push('/faq')">
-          <span class="nav-label gt-xs q-ml-xs">FAQ</span>
-        </q-btn>
+          <q-btn flat dense no-caps icon="help_outline" data-tour="nav-faq" class="nav-btn"
+            :class="{ 'nav-btn--active': route.path == '/faq' }" @click="router.push('/faq')">
+            <span class="nav-label gt-xs q-ml-xs">FAQ</span>
+          </q-btn>
 
-        <q-btn v-if="isAuthenticated" flat dense no-caps icon="school" class="nav-btn"
-          :class="{ 'nav-btn--active': route.path == '/guru-dashboard' }" @click="router.push('/guru-dashboard')">
-          <span class="nav-label gt-xs q-ml-xs">Guru</span>
-        </q-btn>
-        <q-btn v-else flat dense no-caps icon="login" class="nav-btn" @click="router.push('/login')">
-          <span class="nav-label gt-xs q-ml-xs">Login</span>
-        </q-btn>
-
+          <q-btn v-if="isAuthenticated" flat dense no-caps icon="school" class="nav-btn"
+            :class="{ 'nav-btn--active': route.path == '/guru-dashboard' }" @click="router.push('/guru-dashboard')">
+            <span class="nav-label gt-xs q-ml-xs">Guru</span>
+          </q-btn>
+          <q-btn v-else flat dense no-caps icon="login" class="nav-btn" @click="router.push('/login')">
+            <span class="nav-label gt-xs q-ml-xs">Login</span>
+          </q-btn>
+        </template>
       </q-toolbar>
     </q-header>
 
@@ -94,6 +98,11 @@ const { start: startTourById, isActive: isTourActive, maybeAutoStart } = useOnbo
 const { isAuthenticated } = useAuth()
 const router = useRouter()
 const route = useRoute()
+const isMateriPage = computed(() => route.path.startsWith('/materi/'))
+
+
+
+
 const PAGE_TITLES = {
   '/': 'Ruang Belajar Digital',
   '/tentang': 'Tentang — Ruang Belajar Digital',

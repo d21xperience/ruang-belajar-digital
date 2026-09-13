@@ -44,15 +44,31 @@
       <!-- Konten utama -->
       <div class="materi-container">
         <!-- Topbar mobile (hanya materi) -->
-        <div v-if="stage === 'materi' && activeSection" class="mobile-topbar lt-md" data-tour-materi="content">
+        <!-- <div v-if="stage === 'materi' && activeSection" class="mobile-topbar lt-md" data-tour-materi="content">
           <q-btn flat dense round icon="menu" aria-label="Buka daftar bagian" @click="drawer = !drawer" />
           <span class="mono-tag">{{ moduleData?.judulShort || moduleData?.judul }}</span>
-        </div>
+        </div> -->
 
         <!-- STEPPER -->
         <div data-tour-materi="stepper">
           <LearningStepper :steps="stepperSteps" />
         </div>
+
+        <!-- ═══════════════════════════════════════════════════════════
+     FAB: Buka Daftar Bagian (mobile only)
+     Selalu terlihat di kanan bawah layar saat scroll
+     ═══════════════════════════════════════════════════════════ -->
+        <q-btn v-if="stage === 'materi'" class="materi-fab lt-md" round unelevated color="primary" text-color="white"
+          icon="menu" size="md" aria-label="Buka daftar bagian" @click="drawer = !drawer">
+          <q-badge v-if="moduleData?.sections?.length" color="gold" text-color="navy-900" floating rounded>
+            {{ completedSections.length }}/{{ moduleData.sections.length }}
+          </q-badge>
+          <q-tooltip anchor="center left" self="center right">
+            Daftar bagian materi
+          </q-tooltip>
+        </q-btn>
+
+
 
         <!-- ─────── FREE TEST INTRO ─────── -->
         <q-card v-if="stage === 'free-intro'" flat bordered class="stage-card">
@@ -141,28 +157,33 @@
             </div>
 
             <div class="materi-nav" data-tour-materi="nav">
-              <q-btn class="btn-ghost-tech" outline label="Sebelumnya" icon="chevron_left"
-                :disable="activeSectionIndex === 0" @click="prevSection" />
+              <div class="materi-nav-seconday">
+                <q-btn class="btn-ghost-tech" outline label="Sebelumnya" icon="chevron_left"
+                  :disable="activeSectionIndex === 0" @click="prevSection" />
+                <q-btn-dropdown class="btn-ghost-tech" outline icon="picture_as_pdf"
+                  :label="progress ? progressLabel : 'PDF'" data-tour-materi="pdf-btn" :loading="exporting">
+                  <q-list>
+                    <q-item clickable v-close-popup :disable="exporting" @click="downloadActiveSectionPdf">
+                      <q-item-section avatar><q-icon name="article" /></q-item-section>
+                      <q-item-section>
+                        <q-item-label>Bagian Ini Saja</q-item-label>
+                        <q-item-label caption>{{ activeSection?.judul }}</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                    <q-item clickable v-close-popup :disable="exporting" @click="downloadWholeModulePdf">
+                      <q-item-section avatar><q-icon name="menu_book" /></q-item-section>
+                      <q-item-section>
+                        <q-item-label>Seluruh Modul</q-item-label>
+                        <q-item-label caption>{{ moduleData?.judul }}</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-btn-dropdown>
 
-              <q-btn-dropdown class="btn-ghost-tech" outline icon="picture_as_pdf"
-                :label="progress ? progressLabel : 'PDF'" data-tour-materi="pdf-btn" :loading="exporting">
-                <q-list>
-                  <q-item clickable v-close-popup :disable="exporting" @click="downloadActiveSectionPdf">
-                    <q-item-section avatar><q-icon name="article" /></q-item-section>
-                    <q-item-section>
-                      <q-item-label>Bagian Ini Saja</q-item-label>
-                      <q-item-label caption>{{ activeSection?.judul }}</q-item-label>
-                    </q-item-section>
-                  </q-item>
-                  <q-item clickable v-close-popup :disable="exporting" @click="downloadWholeModulePdf">
-                    <q-item-section avatar><q-icon name="menu_book" /></q-item-section>
-                    <q-item-section>
-                      <q-item-label>Seluruh Modul</q-item-label>
-                      <q-item-label caption>{{ moduleData?.judul }}</q-item-label>
-                    </q-item-section>
-                  </q-item>
-                </q-list>
-              </q-btn-dropdown>
+
+              </div>
+
+
 
               <q-btn class="btn-primary-tech" unelevated
                 :label="isLastSection ? 'Lanjut ke Post Test' : 'Sudah Paham, Lanjutkan'" icon-right="chevron_right"
@@ -910,11 +931,38 @@ const progressLabel = computed(() => {
   padding: 24px 16px 60px;
 }
 
-.mobile-topbar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0 16px;
+/* ═════════════════════════════════════════════════════════════
+   FAB — Floating Action Button (mobile only)
+   Posisi kanan atas, sejajar dengan header
+   ═════════════════════════════════════════════════════════════ */
+.materi-fab {
+  position: fixed !important;
+  top: 0px;
+  /* ← tepat di bawah header */
+  right: 0px;
+  bottom: auto;
+  /* ← hapus bottom lama */
+  z-index: 1500;
+  /* ← di atas konten, di bawah drawer */
+  box-shadow: 0 4px 12px rgba(11, 31, 51, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.materi-fab:active {
+  transform: scale(0.95);
+}
+
+.materi-fab:focus-visible {
+  outline: 3px solid var(--gold-500, #C9A227);
+  outline-offset: 2px;
+}
+
+/* Mobile: sedikit lebih kecil dan rapat */
+@media (max-width: 640px) {
+  .materi-fab {
+    top: 56px;
+    right: 10px;
+  }
 }
 
 /* ─── Stage Card ─── */
@@ -1022,6 +1070,73 @@ const progressLabel = computed(() => {
   padding-top: 20px;
   border-top: 1px solid var(--border);
 }
+
+/* ═════════════════════════════════════════════════════════════
+   MATERI NAV — Responsive
+   Desktop: 1 baris horizontal
+   Mobile: 2 baris (secondary + primary)
+   ═════════════════════════════════════════════════════════════ */
+.materi-nav,
+.quiz-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border, #D8DEE5);
+}
+
+.materi-nav-secondary {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+/* Desktop: tombol lanjutkan melebar, secondary tidak */
+.materi-nav-next {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ═══════ Mobile (≤ 640px) ═══════ */
+@media (max-width: 640px) {
+  .materi-nav {
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 16px;
+    margin-top: 20px;
+  }
+
+  /* Baris 1: Prev + PDF side by side */
+  .materi-nav-secondary {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .materi-nav-secondary>* {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Teks tombol prev tidak di-truncate */
+  .materi-nav-secondary :deep(.q-btn__content) {
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  /* Baris 2: Lanjutkan full width */
+  .materi-nav-next {
+    width: 100%;
+    min-width: 0;
+    flex: none;
+  }
+
+  /* Tombol lebih tinggi = mudah ditekan */
+  .materi-nav .q-btn {
+    min-height: 44px;
+  }
+}
+
 
 /* ─── Quiz ─── */
 .quiz-head {
