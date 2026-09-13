@@ -60,3 +60,5 @@ pnpm-debug.log*
 .cache/
 .npm/
 .eslintcache
+
+.sh
